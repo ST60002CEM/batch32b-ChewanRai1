@@ -1,3 +1,4 @@
+import 'package:finalproject/screen/register_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -76,7 +77,8 @@ class _LoginPageState extends State<LoginPage> {
                   // Handle Google sign-in
                 },
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.black, backgroundColor: Colors.white,
+                  foregroundColor: Colors.black,
+                  backgroundColor: Colors.white,
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -106,6 +108,10 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 24.0),
               TextButton(
                 onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignUpPage()),
+                  );
                   // Navigate to sign-up page
                 },
                 child: const Text('New here? Create an account in a minute.'),

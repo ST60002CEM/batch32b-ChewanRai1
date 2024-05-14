@@ -14,14 +14,15 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('HandyHelper'),
+        backgroundColor: Colors.green,
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text('Create an account', style: TextStyle(fontSize: 24.0)),
-            SizedBox(height: 20.0),
+            const Text('Create an account', style: TextStyle(fontSize: 24.0)),
+            const SizedBox(height: 20.0),
             TextField(
               decoration: InputDecoration(
                 hintText: 'Full Name',
@@ -48,18 +49,21 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             SizedBox(height: 20.0),
-            Row(
+            const Row(
               children: <Widget>[
-                Checkbox(
-                  value: _agreeToTerms,
-                  onChanged: (value) => setState(() => _agreeToTerms = value!),
+                Expanded(
+                  // Ensures text fills remaining space and centers
+                  child: Text(
+                    'By signing up, you agree to our Terms & Conditions and Privacy Policy',
+                  ),
                 ),
-                Text(
-                    'By signing up, you agree to our Terms & Conditions and Privacy Policy'),
               ],
             ),
             SizedBox(height: 20.0),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+              ),
               child: Text('Signup'),
               onPressed: () {
                 // Handle signup logic here

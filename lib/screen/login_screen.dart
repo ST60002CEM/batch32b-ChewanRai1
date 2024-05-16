@@ -2,7 +2,8 @@ import 'package:finalproject/screen/register_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final String name;
+  const LoginPage({super.key, required this.name});
 
   @override
   _LoginPageState createState() => _LoginPageState();

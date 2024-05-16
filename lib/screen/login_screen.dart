@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
   final String name;
+
   const LoginPage({super.key, required this.name});
 
   @override
@@ -13,6 +14,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   String _email = '';
   String _password = '';
+  bool _isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +53,25 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 16.0),
               TextFormField(
-                obscureText: true,
-                decoration: const InputDecoration(
+                // obscureText: true,
+                obscureText: !_isPasswordVisible,
+                decoration: InputDecoration(
                   labelText: 'Password',
+                  filled: true,
+                  fillColor: Colors.white,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _isPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      color: Colors.green,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _isPasswordVisible = !_isPasswordVisible;
+                      });
+                    },
+                  ),
                 ),
                 validator: (value) {
                   if (value!.isEmpty) {

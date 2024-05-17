@@ -1,3 +1,4 @@
+import 'package:finalproject/screen/dashboard_screen.dart';
 import 'package:finalproject/screen/register_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -117,6 +118,12 @@ class _LoginPageState extends State<LoginPage> {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
                     // Handle login logic
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DashboardScreen()),
+                    );
                   }
                 },
                 style: ElevatedButton.styleFrom(

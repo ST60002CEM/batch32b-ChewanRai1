@@ -16,8 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-            builder: (context) => const LoginPage(name: 'Chewan')),
+        MaterialPageRoute(builder: (context) => const LoginPage()),
       );
     });
   }
@@ -26,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text('Welcome Chewan Don'),
+        child: Text('HandyHepler'),
       ),
     );
   }

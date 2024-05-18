@@ -26,13 +26,24 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(
-          'HandyHelper',
-          style: GoogleFonts.sora(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.green,
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/images/logo.png', // Update the path if needed
+              height: 100.0,
+              width: 100.0,
+            ),
+            const SizedBox(height: 16.0),
+            Text(
+              'HandyHelper',
+              style: GoogleFonts.sora(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -21,13 +21,24 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'HandyHelper',
-          style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Roboto',
-              color: Colors.green),
+        title: Row(
+          children: [
+            Image.asset(
+              'assets/images/logo.png',
+              height: 37.0,
+              width: 37.0,
+            ),
+            const SizedBox(width: 0.0),
+            const Text(
+              'HandyHelper',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Roboto',
+                color: Colors.green,
+              ),
+            ),
+          ],
         ),
         backgroundColor: Colors.white,
       ),

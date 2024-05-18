@@ -16,13 +16,24 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'HandyHelper',
-          style: GoogleFonts.sora(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.green,
-          ),
+        title: Row(
+          children: [
+            Image.asset(
+              'assets/images/logo.png',
+              height: 37.0,
+              width: 37.0,
+            ),
+            const SizedBox(width: 0.0),
+            const Text(
+              'HandyHelper',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Roboto',
+                color: Colors.green,
+              ),
+            ),
+          ],
         ),
         backgroundColor: Colors.white,
       ),

@@ -11,6 +11,11 @@ class MongoDatabase {
     var status = db.serverStatus();
     print(status);
     var collection = db.collection(COLLECTION_NAME);
+    await collection.insertOne({
+      "username": "chewanrai",
+      "name": "Chewan Rai",
+      "email": "rai@gmail.com"
+    });
     print(await collection.find().toList());
   }
 }

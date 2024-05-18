@@ -1,5 +1,6 @@
 import 'package:finalproject/screen/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -13,7 +14,14 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('HandyHelper'),
+        title: Text(
+          'HandyHelper',
+          style: GoogleFonts.sora(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.blue,
+          ),
+        ),
         backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(

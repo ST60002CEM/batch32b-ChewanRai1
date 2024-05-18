@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:finalproject/screen/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -23,15 +24,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
         child: Text(
-          'HandyHelper',
-          style: TextStyle(
-            fontSize: 24, // Change the font size here
-            fontWeight: FontWeight.bold, // Change the font weight here
-            fontFamily: 'Roboto', // Change the font family here
-            color: Colors.green, // Optionally change the font color
+          'Handy Helper',
+          style: GoogleFonts.sora(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.blue,
           ),
         ),
       ),

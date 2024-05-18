@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Center(
         child: Text(
-          'Handy Helper',
+          'HandyHelper',
           style: GoogleFonts.sora(
             fontSize: 24,
             fontWeight: FontWeight.bold,

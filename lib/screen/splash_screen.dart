@@ -25,7 +25,15 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text('HandyHepler'),
+        child: Text(
+          'HandyHelper',
+          style: TextStyle(
+            fontSize: 24, // Change the font size here
+            fontWeight: FontWeight.bold, // Change the font weight here
+            fontFamily: 'Roboto', // Change the font family here
+            color: Colors.green, // Optionally change the font color
+          ),
+        ),
       ),
     );
   }

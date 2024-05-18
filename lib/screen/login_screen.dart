@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 class LoginPage extends StatefulWidget {
   // final String name;
 
-  const LoginPage({super.key,});
+  const LoginPage({
+    super.key,
+  });
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -22,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('HandyHelper'),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -32,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'Hey, Welcome Back',
+                'Welcome to HandyHelper',
                 style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16.0),
@@ -41,6 +43,8 @@ class _LoginPageState extends State<LoginPage> {
               TextFormField(
                 decoration: const InputDecoration(
                   labelText: 'Email address',
+                  filled: true,
+                  fillColor: Colors.white,
                 ),
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -132,16 +136,16 @@ class _LoginPageState extends State<LoginPage> {
                 child: const Text('Login'),
               ),
               const SizedBox(height: 24.0),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignUpPage()),
-                  );
-                  // Navigate to sign-up page
-                },
-                child: const Text('New here? Create an account in a minute.'),
-              ),
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Text('New here?'),
+                TextButton(
+                  child: Text('Create an account in a minute.'),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => SignUpPage()));
+                  },
+                )
+              ])
             ],
           ),
         ),

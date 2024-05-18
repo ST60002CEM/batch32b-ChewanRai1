@@ -12,7 +12,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return const SizedBox.expand(
       child: Center(
-        child: Text('you can search you helper here'),
+        child: Text('You can search you helper here'),
       ),
     );
   }

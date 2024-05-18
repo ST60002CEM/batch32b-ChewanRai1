@@ -1,3 +1,5 @@
+import 'package:finalproject/screen/dashboard_screen.dart';
+import 'package:finalproject/screen/plan_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -56,6 +58,11 @@ class ProfileScreen extends StatelessWidget {
             title: 'Monthly plans',
             subtitle: 'Your planned projects',
             onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PlanScreen()),
+              );
+
               // Navigate to monthly plans screen
             },
           ),
@@ -105,6 +112,8 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
+class _screens {}
+
 class MenuItem extends StatelessWidget {
   final String title;
   final String subtitle;
@@ -130,10 +139,4 @@ class MenuItem extends StatelessWidget {
       onTap: onTap,
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: ProfileScreen(),
-  ));
 }

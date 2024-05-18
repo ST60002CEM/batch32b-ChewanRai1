@@ -133,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => DashboardScreen()),
+                          builder: (context) => const DashboardScreen()),
                     );
                   }
                 },
@@ -144,12 +144,12 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 24.0),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text('New here?'),
+                const Text('New here?'),
                 TextButton(
-                  child: Text('Create an account in a minute.'),
+                  child: const Text('Create an account in a minute.'),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignUpPage()));
+                        MaterialPageRoute(builder: (context) => const SignUpPage()));
                   },
                 )
               ])

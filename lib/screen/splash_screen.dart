@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
           style: GoogleFonts.sora(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: Colors.blue,
+            color: Colors.green,
           ),
         ),
       ),

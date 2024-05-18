@@ -14,11 +14,11 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   int _selectedIndex = 0;
 
-  List<Widget> _screens = [
-    HomeScreen(),
-    SearchScreen(),
-    PlanScreen(),
-    InboxScreen(),
+  final List<Widget> _screens = [
+    const HomeScreen(),
+    const SearchScreen(),
+    const PlanScreen(),
+    const InboxScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -45,20 +45,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag),
+            icon: Icon(Icons.search),
             label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.calendar_month),
             label: 'Plan',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.album_outlined),
+            icon: Icon(Icons.message_outlined),
             label: 'Inbox',
           ),
         ],
-        backgroundColor: Colors.amber,
-        selectedItemColor: Colors.white,
+        backgroundColor: Colors.white,
+        selectedItemColor: Colors.blueAccent,
         unselectedItemColor: Colors.black,
         currentIndex: _selectedIndex,
         onTap: (index) {

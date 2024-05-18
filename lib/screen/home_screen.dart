@@ -1,11 +1,8 @@
 // import 'package:finalproject/screen/home_screen.dart';
-import 'package:finalproject/screen/inbox_screen.dart';
-import 'package:finalproject/screen/plan_screen.dart';
-import 'package:finalproject/screen/search_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

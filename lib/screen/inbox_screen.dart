@@ -12,7 +12,7 @@ class _InboxScreenState extends State<InboxScreen> {
   Widget build(BuildContext context) {
     return const SizedBox.expand(
       child: Center(
-        child: Text('You will talk to you professionals here'),
+        child: Text('You will talk to your professionals here'),
       ),
     );
   }

@@ -12,7 +12,7 @@ class _PlanScreenState extends State<PlanScreen> {
   Widget build(BuildContext context) {
     return const SizedBox.expand(
       child: Center(
-        child: Text('Your monthly plan'),
+        child: Text('Your monthly plan shows up here'),
       ),
     );
   }

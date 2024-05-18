@@ -1,6 +1,7 @@
 import 'package:finalproject/screen/home_screen.dart';
 import 'package:finalproject/screen/inbox_screen.dart';
 import 'package:finalproject/screen/plan_screen.dart';
+import 'package:finalproject/screen/profile_screen.dart';
 import 'package:finalproject/screen/search_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -20,40 +21,48 @@ class _DashboardScreenState extends State<DashboardScreen> {
     const PlanScreen(),
     const InboxScreen(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Row(
-            children: [
-              // Image.asset(
-              //   'assets/images/logo.png',
-              //   height: 37.0,
-              //   width: 37.0,
-              // ),
-              // const SizedBox(width: 0.0),
-              Text(
-                'HandyHelper',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Roboto',
-                  color: Colors.white,
-                ),
+        title: Row(
+          children: [
+            // Uncomment the following lines if you want to show the logo
+            // Image.asset(
+            //   'assets/images/logo.png',
+            //   height: 37.0,
+            //   width: 37.0,
+            // ),
+            // const SizedBox(width: 0.0),
+            const Text(
+              'HandyHelper',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Roboto',
+                color: Colors.white,
               ),
-            ],
+            ),
+          ],
+        ),
+        backgroundColor: Colors.green,
+        elevation: 2,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person_outline),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfileScreen()),
+              );
+            },
           ),
-          backgroundColor: Colors.green,
-          elevation: 2,
-          actions: const [
-            Icon(Icons.person_outline),
-            SizedBox(width: 16),
-            Icon(Icons.notifications_none),
-            SizedBox(width: 16),
-          ]),
-      // body: const Center(
-      //   child: Text('Dashboard Screen'),
-      // ),
+          const SizedBox(width: 16),
+          const Icon(Icons.notifications_none),
+          const SizedBox(width: 16),
+        ],
+      ),
       body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

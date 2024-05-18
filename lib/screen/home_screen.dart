@@ -15,22 +15,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
-      appBar: AppBar(
-        title: const Text('HandyHelper'),
-        actions: const [
-          Icon(Icons.person_outline),
-          SizedBox(width: 16),
-          Icon(Icons.notifications_none),
-          SizedBox(width: 16),
-        ],
-      ),
+      // backgroundColor: Colors.green,
       body: Column(
         children: [
-          const SizedBox(height: 16),
+          // const SizedBox(height: 16),
           Container(
+            color: Colors.green,
             height: 50,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            // padding: const EdgeInsets.symmetric(horizontal: 16),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(

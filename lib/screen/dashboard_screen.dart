@@ -24,11 +24,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Dashboard Screen"),
-        backgroundColor: Colors.green,
-        centerTitle: true,
-        elevation: 2,
-      ),
+          title: const Text("HandyHelper"),
+          backgroundColor: Colors.green,
+          elevation: 2,
+          actions: const [
+            Icon(Icons.person_outline),
+            SizedBox(width: 16),
+            Icon(Icons.notifications_none),
+            SizedBox(width: 16),
+          ]),
       // body: const Center(
       //   child: Text('Dashboard Screen'),
       // ),

@@ -13,6 +13,7 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [
@@ -21,7 +22,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     const PlanScreen(),
     const InboxScreen(),
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

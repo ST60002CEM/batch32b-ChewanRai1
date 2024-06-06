@@ -11,6 +11,13 @@ class LoginViewModel extends StateNotifier<void> {
   LoginViewModel(this.navigator) : super(null);
   final LoginViewNavigator navigator;
 
+  void login(String email, String password) {
+    // Add your login logic here
+    if (email == "test@example.com" && password == "password") {
+      openDashboard();
+    }
+  }
+
   void openRegisterView() {
     navigator.openRegisterView();
   }

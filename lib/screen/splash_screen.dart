@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:finalproject/features/auth/presentation/view/login_view.dart';
 import 'package:finalproject/screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const LoginPage()),
+        MaterialPageRoute(builder: (context) => const LoginView()),
       );
     });
   }

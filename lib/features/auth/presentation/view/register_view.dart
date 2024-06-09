@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:finalproject/features/auth/presentation/viewmodel/register_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,7 +13,16 @@ class RegisterView extends ConsumerStatefulWidget {
 }
 
 class _RegisterViewState extends ConsumerState<RegisterView> {
-  // Check for camera permission
+  File? _img;
+  final _gap = const SizedBox(height: 8);
+  final _key = GlobalKey<FormState>();
+  final _fnameController = TextEditingController();
+  final _lnameController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+  bool isObscure = true;
+
   checkCameraPermission() async {
     if (await Permission.camera.request().isRestricted ||
         await Permission.camera.request().isDenied) {
@@ -21,33 +30,15 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
     }
   }
 
-  File? _img;
-  Future _browseImage(WidgetRef ref, ImageSource imageSource) async {
-    try {
-      final image = await ImagePicker().pickImage(source: imageSource);
-      if (image != null) {
-        setState(() {
-          _img = File(image.path);
-        });
-      } else {
-        return;
-      }
-    } catch (e) {
-      debugPrint(e.toString());
-    }
+  Future<void> _browseImage(WidgetRef ref, ImageSource imageSource) async {
+    await ref
+        .read(registerViewModelProvider.notifier)
+        .browseImage(ref, imageSource);
+    setState(() {
+      _img = ref.read(registerViewModelProvider.notifier).img;
+    });
   }
 
-  final _gap = const SizedBox(height: 8);
-
-  final _key = GlobalKey<FormState>();
-
-  final _fnameController = TextEditingController();
-  final _lnameController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  bool isObscure = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,7 +75,6 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                                   checkCameraPermission();
                                   _browseImage(ref, ImageSource.camera);
                                   Navigator.pop(context);
-                                  // Upload image it is not null
                                 },
                                 icon: const Icon(Icons.camera),
                                 label: const Text('Camera'),
@@ -154,79 +144,6 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     }),
                   ),
                   _gap,
-                  // if (batchState.isLoading) ...{
-                  //   const Center(
-                  //     child: CircularProgressIndicator(),
-                  //   )
-                  // } else if (batchState.error != null) ...{
-                  //   Center(
-                  //     child: Text(batchState.error!),
-                  //   )
-                  // } else ...{
-                  //   DropdownButtonFormField<BatchEntity>(
-                  //     items: batchState.batches
-                  //         .map((e) => DropdownMenuItem<BatchEntity>(
-                  //               value: e,
-                  //               child: Text(e.batchName),
-                  //             ))
-                  //         .toList(),
-                  //     onChanged: (value) {
-                  //       _dropDownValue = value;
-                  //     },
-                  //     value: _dropDownValue,
-                  //     decoration: const InputDecoration(
-                  //       labelText: 'Select Batch',
-                  //     ),
-                  //     validator: ((value) {
-                  //       if (value == null) {
-                  //         return 'Please select batch';
-                  //       }
-                  //       return null;
-                  //     }),
-                  //   ),
-                  // },
-                  _gap,
-                  // if (courseState.isLoading) ...{
-                  //   const Center(
-                  //     child: CircularProgressIndicator(),
-                  //   )
-                  // } else if (courseState.error != null) ...{
-                  //   Center(
-                  //     child: Text(courseState.error!),
-                  //   )
-                  // } else ...{
-                  //   MultiSelectDialogField(
-                  //     title: const Text('Select course'),
-                  //     items: courseState.courses
-                  //         .map(
-                  //           (course) => MultiSelectItem(
-                  //             course,
-                  //             course.courseName,
-                  //           ),
-                  //         )
-                  //         .toList(),
-                  //     listType: MultiSelectListType.CHIP,
-                  //     buttonText: const Text('Select course'),
-                  //     buttonIcon: const Icon(Icons.search),
-                  //     onConfirm: (values) {
-                  //       _lstCourseSelected.clear();
-                  //       _lstCourseSelected.addAll(values);
-                  //     },
-                  //     decoration: BoxDecoration(
-                  //       border: Border.all(
-                  //         color: Colors.grey,
-                  //       ),
-                  //       borderRadius: BorderRadius.circular(5),
-                  //     ),
-                  //     validator: ((value) {
-                  //       if (value == null || value.isEmpty) {
-                  //         return 'Please select courses';
-                  //       }
-                  //       return null;
-                  //     }),
-                  //   ),
-                  // },
-                  _gap,
                   TextFormField(
                     controller: _usernameController,
                     decoration: const InputDecoration(
@@ -264,7 +181,6 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     }),
                   ),
                   _gap,
-
                   ElevatedButton(
                     onPressed: () {
                       if (_key.currentState!.validate()) {}

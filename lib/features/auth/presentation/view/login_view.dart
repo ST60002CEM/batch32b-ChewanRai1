@@ -147,15 +147,17 @@ class _LoginViewState extends ConsumerState<LoginView> {
                             _formKey.currentState!.save();
                             ref
                                 .read(loginViewModelProvider.notifier)
-                                .login(_email, _password);
-                          } else {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const DashboardScreen()),
-                            );
+                                // .login(_email, _password);
+                                .openDashboard();
                           }
+                          // else {
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) =>
+                          //             const DashboardScreen()),
+                          //   );
+                          // }
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,

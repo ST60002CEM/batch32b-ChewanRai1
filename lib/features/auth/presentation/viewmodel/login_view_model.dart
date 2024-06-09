@@ -13,7 +13,7 @@ class LoginViewModel extends StateNotifier<void> {
 
   void login(String email, String password) {
     // Add your login logic here
-    if (email == "test@example.com" && password == "password") {
+    if (email == "" && password == "") {
       openDashboard();
     }
   }

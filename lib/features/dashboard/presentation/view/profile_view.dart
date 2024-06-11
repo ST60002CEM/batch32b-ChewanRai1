@@ -1,6 +1,4 @@
 import 'package:finalproject/features/dashboard/presentation/view/plan_view.dart';
-import 'package:finalproject/screen/dashboard_screen.dart';
-import 'package:finalproject/screen/plan_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProfileView extends StatelessWidget {

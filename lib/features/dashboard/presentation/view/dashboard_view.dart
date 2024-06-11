@@ -1,13 +1,8 @@
 import 'package:finalproject/features/dashboard/presentation/view/home_view.dart';
 import 'package:finalproject/features/dashboard/presentation/view/inbox_view.dart';
 import 'package:finalproject/features/dashboard/presentation/view/plan_view.dart';
-import 'package:finalproject/features/dashboard/presentation/view/profile_screen.dart';
+import 'package:finalproject/features/dashboard/presentation/view/profile_view.dart';
 import 'package:finalproject/features/dashboard/presentation/view/search_view.dart';
-// import 'package:finalproject/screen/home_screen.dart';
-import 'package:finalproject/screen/inbox_screen.dart';
-import 'package:finalproject/screen/plan_screen.dart';
-import 'package:finalproject/screen/profile_screen.dart';
-import 'package:finalproject/screen/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

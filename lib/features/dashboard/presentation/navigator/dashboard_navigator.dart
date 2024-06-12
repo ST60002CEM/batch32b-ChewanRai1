@@ -1,5 +1,6 @@
 import 'package:finalproject/app/navigator/navigator.dart';
-import 'package:finalproject/features/home/presentation/view/home_view.dart';
+import 'package:finalproject/features/dashboard/presentation/view/dashboard_view.dart';
+import 'package:finalproject/features/dashboard/presentation/view/home_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final homeViewNavigatorProvider = Provider((ref) => HomeNavigator());
@@ -8,6 +9,6 @@ class HomeNavigator {}
 
 mixin HomeViewRoute {
   openDashboardView() {
-    NavigateRoute.pushRoute(const HomeView());
+    NavigateRoute.pushRoute(const DashboardView());
   }
 }

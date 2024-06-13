@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:finalproject/features/auth/domain/entity/auth_entity.dart';
+import 'package:finalproject/features/auth/presentation/viewmodel/auth_view_model.dart';
 import 'package:finalproject/features/auth/presentation/viewmodel/register_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,16 +15,6 @@ class RegisterView extends ConsumerStatefulWidget {
 }
 
 class _RegisterViewState extends ConsumerState<RegisterView> {
-  File? _img;
-  final _gap = const SizedBox(height: 8);
-  final _key = GlobalKey<FormState>();
-  final _fnameController = TextEditingController();
-  final _lnameController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
-  bool isObscure = true;
-
   checkCameraPermission() async {
     if (await Permission.camera.request().isRestricted ||
         await Permission.camera.request().isDenied) {
@@ -30,14 +22,33 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
     }
   }
 
-  Future<void> _browseImage(WidgetRef ref, ImageSource imageSource) async {
-    await ref
-        .read(registerViewModelProvider.notifier)
-        .browseImage(ref, imageSource);
-    setState(() {
-      _img = ref.read(registerViewModelProvider.notifier).img;
-    });
+  File? _img;
+  Future _browseImage(WidgetRef ref, ImageSource imageSource) async {
+    try {
+      final image = await ImagePicker().pickImage(source: imageSource);
+      if (image != null) {
+        setState(() {
+          _img = File(image.path);
+        });
+      } else {
+        return;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
+
+  final _gap = const SizedBox(height: 8);
+  final _key = GlobalKey<FormState>();
+
+  final _fnameController = TextEditingController();
+  final _lnameController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _emailController = TextEditingController();
+
+  bool isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +149,23 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     ),
                     validator: ((value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter phoneNo';
+                        return 'Please enter phone no';
+                      }
+                      return null;
+                    }),
+                  ),
+                  _gap,
+                  TextFormField(
+                    controller: _emailController,
+                    decoration: const InputDecoration(
+                      labelText: 'Email',
+                    ),
+                    validator: ((value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter email';
+                      }
+                      if (!value.contains('@')) {
+                        return 'Please enter a valid email';
                       }
                       return null;
                     }),
@@ -181,11 +208,30 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     }),
                   ),
                   _gap,
-                  ElevatedButton(
-                    onPressed: () {
-                      if (_key.currentState!.validate()) {}
-                    },
-                    child: const Text('Register'),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_key.currentState!.validate()) {
+                          var student = AuthEntity(
+                            fname: _fnameController.text,
+                            lname: _lnameController.text,
+                            image:
+                                ref.read(authViewModelProvider).imageName ?? '',
+                            phone: _phoneController.text,
+                            email: _emailController.text,
+                            username: _usernameController.text,
+                            password: _passwordController.text,
+
+                          );
+
+                          ref
+                              .read(authViewModelProvider.notifier)
+                              .registerStudent(student);
+                        }
+                      },
+                      child: const Text('Register'),
+                    ),
                   ),
                 ],
               ),

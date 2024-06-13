@@ -1,4 +1,5 @@
 import 'package:finalproject/features/auth/presentation/view/register_view.dart';
+import 'package:finalproject/features/auth/presentation/viewmodel/auth_view_model.dart';
 import 'package:finalproject/features/auth/presentation/viewmodel/login_view_model.dart';
 import 'package:finalproject/screen/dashboard_screen.dart';
 import 'package:flutter/material.dart';
@@ -146,9 +147,9 @@ class _LoginViewState extends ConsumerState<LoginView> {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             ref
-                                .read(loginViewModelProvider.notifier)
+                                .read(authViewModelProvider.notifier);
                                 // .login(_email, _password);
-                                .openDashboard();
+                                // .openDashboard();
                           }
                           // else {
                           //   Navigator.push(

@@ -7,10 +7,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // to go to the register view
 final loginViewNavigatorProvider = Provider((ref) => LoginViewNavigator());
 
-class LoginViewNavigator with RegisterViewRoute, HomeViewRoute{}
+class LoginViewNavigator with RegisterViewRoute, HomeViewRoute {}
 
-mixin LoginViewRoute{
-  openLoginView(){
-    NavigateRoute.pushRoute(const LoginView());
+mixin LoginViewRoute {
+  openLoginView() {
+    NavigateRoute.popAndPushRoute(const LoginView());
   }
 }

@@ -1,7 +1,4 @@
-import 'package:finalproject/features/auth/presentation/view/register_view.dart';
 import 'package:finalproject/features/auth/presentation/viewmodel/auth_view_model.dart';
-import 'package:finalproject/features/auth/presentation/viewmodel/login_view_model.dart';
-import 'package:finalproject/screen/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,10 +11,11 @@ class LoginView extends ConsumerStatefulWidget {
 
 class _LoginViewState extends ConsumerState<LoginView> {
   final _formKey = GlobalKey<FormState>();
-  String _email = '';
-  String _password = '';
-  bool _isPasswordVisible = false;
+  final _emailController = TextEditingController(text: 'Chewan');
+  final _passwordController = TextEditingController(text: 'kiran123');
 
+  bool _isPasswordVisible = false;
+  bool isObscure = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +27,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
               height: 37.0,
               width: 37.0,
             ),
-            const SizedBox(width: 0.0),
+            const SizedBox(width: 8.0), // Adjusted spacing
             const Text(
               'HandyHelper',
               style: TextStyle(
@@ -61,6 +59,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                 const Text('Please login to continue'),
                 const SizedBox(height: 24.0),
                 TextFormField(
+                  controller: _emailController,
                   decoration: const InputDecoration(
                     labelText: 'Email address',
                     filled: true,
@@ -72,13 +71,11 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     }
                     return null;
                   },
-                  onSaved: (value) {
-                    _email = value!;
-                  },
                 ),
                 const SizedBox(height: 16.0),
                 TextFormField(
                   obscureText: !_isPasswordVisible,
+                  controller: _passwordController,
                   decoration: InputDecoration(
                     labelText: 'Password',
                     filled: true,
@@ -103,9 +100,6 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     }
                     return null;
                   },
-                  onSaved: (value) {
-                    _password = value!;
-                  },
                 ),
                 const SizedBox(height: 16.0),
                 Align(
@@ -114,7 +108,12 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     onPressed: () {
                       // Handle forgot password action
                     },
-                    child: const Text('Forgot password?'),
+                    child: const Text(
+                      'Forgot password?',
+                      style: TextStyle(
+                        color: Colors.green, // Changed text color
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 50.0),
@@ -124,7 +123,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.black,
-                    backgroundColor: Colors.white,
+                    backgroundColor: Colors.white, // Changed text color
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
@@ -134,7 +133,12 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         height: 24.0,
                       ),
                       const SizedBox(width: 8.0),
-                      const Text('Continue with Google'),
+                      const Text(
+                        'Continue with Google',
+                        style: TextStyle(
+                          fontSize: 16, // Adjusted font size
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -143,27 +147,27 @@ class _LoginViewState extends ConsumerState<LoginView> {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            _formKey.currentState!.save();
-                            ref
-                                .read(authViewModelProvider.notifier);
-                                // .login(_email, _password);
-                                // .openDashboard();
+                            await ref
+                                .read(authViewModelProvider.notifier)
+                                .loginStudent(
+                                  _emailController.text,
+                                  _passwordController.text,
+                                );
                           }
-                          // else {
-                          //   Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) =>
-                          //             const DashboardScreen()),
-                          //   );
-                          // }
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green,
+                          backgroundColor: Colors.green, // Changed button color
                         ),
-                        child: const Text('Login'),
+                        child: const Text(
+                          'Login',
+                          style: TextStyle(
+                            fontSize: 18, // Adjusted font size
+                            fontFamily: 'Roboto', // Applied font family
+                            fontWeight: FontWeight.bold, // Applied font weight
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -174,12 +178,16 @@ class _LoginViewState extends ConsumerState<LoginView> {
                   children: [
                     const Text('New here?'),
                     TextButton(
-                      child: const Text('Create an account in a minute.'),
+                      child: const Text(
+                        'Create an account in a minute.',
+                        style: TextStyle(
+                          color: Colors.green, // Changed text color
+                        ),
+                      ),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const RegisterView()));
+                        ref
+                            .read(authViewModelProvider.notifier)
+                            .openRegisterView();
                       },
                     ),
                   ],

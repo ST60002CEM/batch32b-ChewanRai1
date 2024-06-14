@@ -222,7 +222,6 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                             email: _emailController.text,
                             username: _usernameController.text,
                             password: _passwordController.text,
-
                           );
 
                           ref

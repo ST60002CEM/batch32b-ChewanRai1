@@ -28,11 +28,11 @@ class AuthLocalDataSource {
   }
 
   Future<Either<Failure, bool>> loginStudent(
-    String username,
+    String email,
     String password,
   ) async {
     try {
-      AuthHiveModel? students = await _hiveService.login(username, password);
+      AuthHiveModel? students = await _hiveService.login(email, password);
       return const Right(true);
     } catch (e) {
       return Left(Failure(error: e.toString()));

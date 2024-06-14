@@ -12,17 +12,17 @@ class SplashViewModel extends StateNotifier<void> {
 
   final SplashViewNavigator navigator;
 
-  // open the login view
+  // Open Login page
   void openLoginView() {
-    Future.delayed(
-      const Duration(seconds: 2),
-      () {
-        navigator.openLoginView();
-      },
-    );
+    Future.delayed(const Duration(seconds: 1), () {
+      navigator.openLoginView();
+    });
   }
 
-  void openHomeView() {}
+  // Later on we will add open home page method here as well
+  void openHomeView() {
+    // Your code goes here
+  }
 }
 
 //Chatgpt

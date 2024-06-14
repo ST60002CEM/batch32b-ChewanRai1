@@ -13,7 +13,7 @@ final authHiveModelProvider = Provider(
 @HiveType(typeId: HiveTableConstant.studentTableId)
 class AuthHiveModel {
   @HiveField(0)
-  final String studentId;
+  final String? studentId;
 
   @HiveField(1)
   final String fname;
@@ -32,10 +32,10 @@ class AuthHiveModel {
   @HiveField(4)
   final String email;
 
-  @HiveField(6)
+  @HiveField(5)
   final String username;
 
-  @HiveField(7)
+  @HiveField(6)
   final String password;
 
   // Constructor
@@ -97,6 +97,6 @@ class AuthHiveModel {
 
   @override
   String toString() {
-    return 'studentId: $studentId, fname: $fname, lname: $lname, phone: $phone, email:$email, username: $username, password: $password';
+    return 'studentId: $studentId, fname: $fname, lname: $lname, phone: $phone, email: $email, username: $username, password: $password';
   }
 }

@@ -11,8 +11,8 @@ class LoginView extends ConsumerStatefulWidget {
 
 class _LoginViewState extends ConsumerState<LoginView> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController(text: 'Chewan');
-  final _passwordController = TextEditingController(text: 'kiran123');
+  final _emailController = TextEditingController(text: 'Chewan@gmail.com');
+  final _passwordController = TextEditingController(text: 'chewan123');
 
   bool _isPasswordVisible = false;
   bool isObscure = true;

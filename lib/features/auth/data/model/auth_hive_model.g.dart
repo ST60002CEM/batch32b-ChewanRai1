@@ -18,12 +18,12 @@ class AuthHiveModelAdapter extends TypeAdapter<AuthHiveModel> {
     };
     return AuthHiveModel(
       studentId: fields[0] as String?,
-      fname: fields[1] as String? ?? '',
-      lname: fields[2] as String? ?? '',
-      phone: fields[3] as String? ?? '',
-      email: fields[4] as String? ?? '',
-      username: fields[5] as String? ?? '',
-      password: fields[6] as String? ?? '',
+      fname: fields[1] as String,
+      lname: fields[2] as String,
+      phone: fields[3] as String,
+      email: fields[4] as String,
+      username: fields[5] as String,
+      password: fields[6] as String,
     );
   }
 

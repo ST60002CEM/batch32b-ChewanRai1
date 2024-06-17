@@ -8,7 +8,7 @@ import 'mongodb.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await HiveService().init();
+  // await HiveService().init();
   // await MongoDatabase.connect();
   runApp(
     const ProviderScope(

@@ -23,21 +23,21 @@ class AuthRemoteDataSource {
 
   AuthRemoteDataSource({required this.dio, required this.userSharedPrefs});
 
-  Future<Either<Failure, bool>> registerStudent(AuthEntity student) async {
+  Future<Either<Failure, bool>> registerUser(AuthEntity user) async {
     try {
       Response response = await dio.post(
         ApiEndpoints.register,
         data: {
-          "fname": student.fname,
-          "lname": student.lname,
-          "phone": student.phone,
-          // "image": student.image,
-          'email': student.email,
-          "username": student.username,
-          "password": student.password,
-          // "batch": student.batch.batchId,
+          "fname": user.fname,
+          "lname": user.lname,
+          "phone": user.phone,
+          // "image": user.image,
+          'email': user.email,
+          "username": user.username,
+          "password": user.password,
+          // "batch": user.batch.batchId,
           // "course": ["6489a5908dbc6d39719ec19c", "6489a5968dbc6d39719ec19e"]
-          // "course": student.courses.map((e) => e.courseId).toList(),
+          // "course": user.courses.map((e) => e.courseId).toList(),
         },
       );
       if (response.statusCode == 200) {
@@ -91,7 +91,7 @@ class AuthRemoteDataSource {
     }
   }
 
-  Future<Either<Failure, bool>> loginStudent(
+  Future<Either<Failure, bool>> loginUser(
     String email,
     String password,
   ) async {

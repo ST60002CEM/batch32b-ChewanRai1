@@ -213,7 +213,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (_key.currentState!.validate()) {
-                          var student = AuthEntity(
+                          var user = AuthEntity(
                             fname: _fnameController.text,
                             lname: _lnameController.text,
                             image:
@@ -226,7 +226,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
 
                           ref
                               .read(authViewModelProvider.notifier)
-                              .registerStudent(student);
+                              .registerUser(user);
                         }
                       },
                       child: const Text('Register'),

@@ -151,7 +151,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                           if (_formKey.currentState!.validate()) {
                             await ref
                                 .read(authViewModelProvider.notifier)
-                                .loginStudent(
+                                .loginUser(
                                   _emailController.text,
                                   _passwordController.text,
                                 );

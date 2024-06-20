@@ -1,7 +1,6 @@
 import 'package:finalproject/app/navigator_key/navigator_key.dart';
 import 'package:finalproject/app/themes/app_theme.dart';
 import 'package:finalproject/features/splash/presentation/view/splash_view.dart';
-import 'package:finalproject/theme/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

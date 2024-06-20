@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:finalproject/core/failure/failure.dart';
-import 'package:finalproject/features/auth/data/repository/auth_local_repository.dart';
 import 'package:finalproject/features/auth/data/repository/auth_remote_repository.dart';
 import 'package:finalproject/features/auth/domain/entity/auth_entity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

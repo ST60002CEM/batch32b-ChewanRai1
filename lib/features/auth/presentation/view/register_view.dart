@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:finalproject/features/auth/domain/entity/auth_entity.dart';
 import 'package:finalproject/features/auth/presentation/viewmodel/auth_view_model.dart';
-import 'package:finalproject/features/auth/presentation/viewmodel/register_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -110,8 +109,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                         radius: 50,
                         backgroundImage: _img != null
                             ? FileImage(_img!)
-                            : const AssetImage('assets/images/profile.png')
-                                as ImageProvider,
+                            : const AssetImage('') as ImageProvider,
                       ),
                     ),
                   ),
@@ -213,7 +211,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (_key.currentState!.validate()) {
-                          var student = AuthEntity(
+                          var user = AuthEntity(
                             fname: _fnameController.text,
                             lname: _lnameController.text,
                             image:
@@ -226,7 +224,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
 
                           ref
                               .read(authViewModelProvider.notifier)
-                              .registerStudent(student);
+                              .registerUser(user);
                         }
                       },
                       child: const Text('Register'),

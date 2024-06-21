@@ -9,11 +9,11 @@ class ApiEndpoints {
   // ====================== Auth Routes ======================
   static const String login = "login";
   static const String register = "create";
-  static const String getAllStudent = "auth/getAllStudents";
-  static const String getStudentsByBatch = "auth/getStudentsByBatch/";
-  static const String getStudentsByCourse = "auth/getStudentsByCourse/";
-  static const String updateStudent = "auth/updateStudent/";
-  static const String deleteStudent = "auth/deleteStudent/";
+  static const String getAlluser = "auth/getAllusers";
+  static const String getusersByBatch = "auth/getusersByBatch/";
+  static const String getusersByCourse = "auth/getusersByCourse/";
+  static const String updateuser = "auth/updateuser/";
+  static const String deleteuser = "auth/deleteuser/";
   static const String imageUrl = "http://localhost:8000/uploads/";
   static const String uploadImage = "auth/uploadImage";
   static const String currentUser = "auth/getMe";

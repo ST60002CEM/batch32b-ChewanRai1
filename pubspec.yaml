@@ -52,6 +52,7 @@ dependencies:
   hive_flutter: ^1.1.0
   mongo_dart: ^0.10.2
 
+  json_annotation: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

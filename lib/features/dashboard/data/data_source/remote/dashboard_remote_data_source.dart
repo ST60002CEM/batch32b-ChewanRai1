@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:finalproject/app/constants/api_endpoint.dart';
 import 'package:finalproject/core/failure/post_failure.dart';
 import 'package:finalproject/core/networking/remote/http_service.dart';
+import 'package:finalproject/features/dashboard/data/dto/dashboard_dto.dart';
 import 'package:finalproject/features/dashboard/domain/entity/dashboard_entity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:gift_bazar/app/constant/api_endpoint.dart';
@@ -31,7 +32,7 @@ class DashboardRemoteDataSource {
       );
       // final data = response.data as List;
       if (response.statusCode == 201) {
-        final getAllPostDto = GetPostDto.fromJson(response.data);
+        final getAllPostDto = DashboardDto.fromJson(response.data);
         final posts = getAllPostDto.data.map((e) => e.toEntity()).toList();
         return Right(posts);
       } else {

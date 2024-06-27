@@ -6,14 +6,9 @@ import 'package:finalproject/core/networking/remote/http_service.dart';
 import 'package:finalproject/features/dashboard/data/dto/dashboard_dto.dart';
 import 'package:finalproject/features/dashboard/domain/entity/dashboard_entity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:gift_bazar/app/constant/api_endpoint.dart';
-// import 'package:gift_bazar/core/failure/post_failure.dart';
-// import 'package:gift_bazar/core/networking/remote/http_service.dart';
-// import 'package:gift_bazar/features/home/data/dto/get_post_dto.dart';
-// import 'package:gift_bazar/features/home/data/model/posts.dart';
-// import 'package:gift_bazar/features/home/domain/entity/get_post_entity.dart';
 
-final dashboardRemoteDataSourceProvider = Provider<DashboardRemoteDataSource>((ref) {
+final dashboardRemoteDataSourceProvider =
+    Provider<DashboardRemoteDataSource>((ref) {
   final dio = ref.read(httpServiceProvider);
   return DashboardRemoteDataSource(dio);
 });
@@ -21,7 +16,8 @@ final dashboardRemoteDataSourceProvider = Provider<DashboardRemoteDataSource>((r
 class DashboardRemoteDataSource {
   final Dio _dio;
   DashboardRemoteDataSource(this._dio);
-  Future<Either<PostFailure, List<DashboardEntity>>> getAllPosts(int page) async {
+  Future<Either<PostFailure, List<DashboardEntity>>> getAllPosts(
+      int page) async {
     try {
       final response = await _dio.get(
         ApiEndpoints.pagination,
@@ -48,6 +44,4 @@ class DashboardRemoteDataSource {
       return Left(PostFailure(message: e.message.toString()));
     }
   }
-
-
 }

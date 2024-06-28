@@ -1,22 +1,16 @@
 import 'package:finalproject/app/navigator/navigator.dart';
+import 'package:finalproject/features/dashboard/presentation/view/dashboard_view.dart';
+import 'package:finalproject/features/dashboard/presentation/view/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:finalproject/features/dashboard/presentation/view/dashboard_view.dart';
-import 'package:finalproject/features/dashboard/presentation/view/profile_view.dart';
 
-// Provider for DashboardNavigator
-final dashboardNavigatorProvider = Provider((ref) => DashboardNavigator());
+final dashboardViewNavigatorProvider =
+    Provider<DashboardViewNavigator>((ref) => DashboardViewNavigator());
 
-class DashboardNavigator with DashboardViewRoute {}
+class DashboardViewNavigator {}
 
 mixin DashboardViewRoute {
-  openDashboardView() {
-    NavigateRoute.popAndPushRoute(const DashboardView());
+  void openDashboardView() {
+    NavigateRoute.pushRoute(const DashboardView());
   }
 }
-
-// mixin ProfileViewRoute {
-//   void openProfileView(BuildContext context) {
-//     Navigator.pushNamed(context, DashboardNavigator.profile_view);
-//   }
-// }

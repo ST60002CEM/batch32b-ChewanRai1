@@ -17,7 +17,7 @@ class ApiEndpoints {
   static const String imageUrl = "http://localhost:8000/api/product/";
   static const String uploadImage = "auth/uploadImage";
   static const String currentUser = "auth/getMe";
-  static const String pagination = "products/pagination";
+  static const String pagination = "pagination";
   static const String photos = "photos";
 
   static const limitPage = 20;

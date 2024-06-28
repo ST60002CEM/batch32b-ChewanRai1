@@ -1,154 +1,82 @@
-// import 'package:finalproject/screen/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:finalproject/features/dashboard/domain/entity/dashboard_entity.dart';
+import 'package:finalproject/features/dashboard/presentation/state/dashboard_state.dart';
+import 'package:finalproject/features/dashboard/presentation/viewmodel/dashboard_view_model.dart';
 
-class HomeView extends StatefulWidget {
+class HomeView extends ConsumerStatefulWidget {
   const HomeView({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  ConsumerState<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomeViewState extends ConsumerState<HomeView> {
+  int _currentPage = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchPosts();
+  }
+
+  Future<void> _fetchPosts() async {
+    final viewModel = ref.read(dashboardViewModelProvider);
+    await viewModel.fetchPosts(_currentPage);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final postsState = ref.watch(dashboardStateProvider);
+
     return Scaffold(
-      // backgroundColor: Colors.green,
-      body: Column(
-        children: [
-          // const SizedBox(height: 16),
-          Container(
-            color: Colors.green,
-            height: 50,
-            // padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  _buildCategoryButton('All', Colors.amber),
-                  _buildCategoryButton('Cleaner', Colors.white),
-                  _buildCategoryButton('Electrician', Colors.white),
-                  _buildCategoryButton('Plumber', Colors.white),
-                  _buildCategoryButton('Painter', Colors.white),
-                  _buildCategoryButton('More..', Colors.white),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              'For your home',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          Expanded(
-            flex: 3,
-            child: ListView(
-              children: [
-                _buildInfoCard(
-                  'Upkeep 101',
-                  'Learn the basics to keep your home in great shape.',
-                  'assets/images/upkeep.jpeg',
-                ),
-                _buildInfoCard(
-                  'Energy efficiency',
-                  'Learn how to conserve energy and lower costs.',
-                  'assets/images/energy.jpeg',
-                ),
-                _buildInfoCard(
-                  'Pet proofing',
-                  'Make your home safe and comfortable for your pets.',
-                  'assets/images/pet.jpeg',
-                ),
-                _buildInfoCard(
-                  'Moving',
-                  'Make the transition easier with these projects.',
-                  'assets/images/moving.jpeg',
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildCategoryButton(String label, Color color) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 16),
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          backgroundColor: color == Colors.amber ? Colors.amber : Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.green, Colors.white],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Text(
-            label,
-            style: TextStyle(
-              color: color == Colors.amber ? Colors.white : Colors.black,
-            ),
-          ),
+        child: postsState.when(
+          data: (posts) => _buildPostsList(posts),
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (error, _) => Center(child: Text(error.toString())),
         ),
       ),
     );
   }
 
-  Widget _buildInfoCard(String title, String description, String imagePath) {
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(16),
-              bottomLeft: Radius.circular(16),
+  Widget _buildPostsList(List<DashboardEntity> posts) {
+    if (posts.isEmpty) {
+      return const Center(child: Text('No posts available'));
+    }
+    return Column(
+      children: [
+        Expanded(
+          child: GridView.builder(
+            padding: const EdgeInsets.all(8.0),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 8.0,
+              mainAxisSpacing: 8.0,
             ),
-            child: Image.asset(
-              imagePath,
-              fit: BoxFit.cover,
-              height: 150,
-              width: 150,
-            ),
+            itemCount: posts.length,
+            itemBuilder: (context, index) {
+              return Image.network(posts[index].productImage);
+            },
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(description),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+        TextButton(
+          onPressed: () {
+            setState(() {
+              _currentPage++;
+            });
+            _fetchPosts();
+          },
+          child: const Text('Load More'),
+        ),
+      ],
     );
   }
-}
-
-void main() {
-  runApp(const MaterialApp(
-    home: HomeView(),
-  ));
 }

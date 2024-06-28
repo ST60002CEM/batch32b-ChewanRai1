@@ -14,7 +14,7 @@ class ApiEndpoints {
   static const String getusersByCourse = "auth/getusersByCourse/";
   static const String updateuser = "auth/updateuser/";
   static const String deleteuser = "auth/deleteuser/";
-  static const String imageUrl = "http://localhost:8000/products/";
+  static const String imageUrl = "http://localhost:8000/api/product/";
   static const String uploadImage = "auth/uploadImage";
   static const String currentUser = "auth/getMe";
   static const String pagination = "products/pagination";

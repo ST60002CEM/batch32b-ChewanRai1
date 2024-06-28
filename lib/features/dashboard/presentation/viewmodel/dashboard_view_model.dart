@@ -1,12 +1,16 @@
-import 'package:finalproject/features/dashboard/presentation/navigator/dashboard_navigator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:finalproject/features/dashboard/presentation/state/dashboard_state.dart';
 
-final homeViewModelProvider = StateNotifierProvider<HomeViewModel, void>((ref) {
-  final navigator = ref.read(homeViewNavigatorProvider);
-  return HomeViewModel(navigator);
-});
+class DashboardViewModel {
+  final Ref _ref;
 
-class HomeViewModel extends StateNotifier<void> {
-  HomeViewModel(this.navigator) : super(null);
-  final HomeNavigator navigator;
+  DashboardViewModel(this._ref);
+
+  Future<void> fetchPosts(int page) async {
+    await _ref.read(dashboardStateProvider.notifier).fetchPosts(page);
+  }
 }
+
+final dashboardViewModelProvider = Provider((ref) {
+  return DashboardViewModel(ref);
+});

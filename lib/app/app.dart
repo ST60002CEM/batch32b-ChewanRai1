@@ -15,8 +15,8 @@ class App extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       title: 'Handyhelper',
       theme: AppTheme.getApplicationTheme(false),
-      // home: const SplashView(),
-      home: const CheckInternet(),
+      home: const SplashView(),
+      // home: const CheckInternet(),
     );
   }
 }

@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:finalproject/features/dashboard/presentation/view/home_view.dart';
 import 'package:finalproject/features/dashboard/presentation/view/inbox_view.dart';
 import 'package:finalproject/features/dashboard/presentation/view/plan_view.dart';
 import 'package:finalproject/features/dashboard/presentation/view/profile_view.dart';
 import 'package:finalproject/features/dashboard/presentation/view/search_view.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:finalproject/features/dashboard/presentation/navigator/dashboard_navigator.dart';
 
 class DashboardView extends ConsumerStatefulWidget {
   const DashboardView({super.key});
@@ -22,19 +23,15 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
     const PlanView(),
     const InboxView(),
   ];
+
   @override
   Widget build(BuildContext context) {
+    final navigator = ref.watch(dashboardNavigatorProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Row(
           children: [
-            // Uncomment the following lines if you want to show the logo
-            // Image.asset(
-            //   'assets/images/logo.png',
-            //   height: 37.0,
-            //   width: 37.0,
-            // ),
-            // const SizedBox(width: 0.0),
             Text(
               'HandyHelper',
               style: TextStyle(
@@ -63,7 +60,16 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
           const SizedBox(width: 16),
         ],
       ),
-      body: _screens[_selectedIndex],
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.green, Colors.white],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: _screens[_selectedIndex],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const [

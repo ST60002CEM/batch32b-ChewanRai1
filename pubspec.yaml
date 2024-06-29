@@ -51,6 +51,8 @@ dependencies:
   hive: ^2.0.5
   hive_flutter: ^1.1.0
   mongo_dart: ^0.10.2
+  provider: ^6.0.3
+  connectivity_plus: ^4.0.1
 
   json_annotation: any
 dev_dependencies:

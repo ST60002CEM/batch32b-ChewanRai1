@@ -64,55 +64,55 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
               key: _key,
               child: Column(
                 children: [
-                  InkWell(
-                    onTap: () {
-                      showModalBottomSheet(
-                        backgroundColor: Colors.grey[300],
-                        context: context,
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(20),
-                          ),
-                        ),
-                        builder: (context) => Padding(
-                          padding: const EdgeInsets.all(20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              ElevatedButton.icon(
-                                onPressed: () {
-                                  checkCameraPermission();
-                                  _browseImage(ref, ImageSource.camera);
-                                  Navigator.pop(context);
-                                },
-                                icon: const Icon(Icons.camera),
-                                label: const Text('Camera'),
-                              ),
-                              ElevatedButton.icon(
-                                onPressed: () {
-                                  _browseImage(ref, ImageSource.gallery);
-                                  Navigator.pop(context);
-                                },
-                                icon: const Icon(Icons.image),
-                                label: const Text('Gallery'),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                    child: SizedBox(
-                      height: 200,
-                      width: 200,
-                      child: CircleAvatar(
-                        radius: 50,
-                        backgroundImage: _img != null
-                            ? FileImage(_img!)
-                            : const AssetImage('') as ImageProvider,
-                      ),
-                    ),
-                  ),
+                  // InkWell(
+                  //   onTap: () {
+                  //     showModalBottomSheet(
+                  //       backgroundColor: Colors.grey[300],
+                  //       context: context,
+                  //       isScrollControlled: true,
+                  //       shape: const RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.vertical(
+                  //           top: Radius.circular(20),
+                  //         ),
+                  //       ),
+                  //       builder: (context) => Padding(
+                  //         padding: const EdgeInsets.all(20),
+                  //         child: Row(
+                  //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //           children: [
+                  //             ElevatedButton.icon(
+                  //               onPressed: () {
+                  //                 checkCameraPermission();
+                  //                 _browseImage(ref, ImageSource.camera);
+                  //                 Navigator.pop(context);
+                  //               },
+                  //               icon: const Icon(Icons.camera),
+                  //               label: const Text('Camera'),
+                  //             ),
+                  //             ElevatedButton.icon(
+                  //               onPressed: () {
+                  //                 _browseImage(ref, ImageSource.gallery);
+                  //                 Navigator.pop(context);
+                  //               },
+                  //               icon: const Icon(Icons.image),
+                  //               label: const Text('Gallery'),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       ),
+                  //     );
+                  //   },
+                  //   child: SizedBox(
+                  //     height: 200,
+                  //     width: 200,
+                  //     child: CircleAvatar(
+                  //       radius: 50,
+                  //       backgroundImage: _img != null
+                  //           ? FileImage(_img!)
+                  //           : const AssetImage('') as ImageProvider,
+                  //     ),
+                  //   ),
+                  // ),
                   const SizedBox(height: 25),
                   TextFormField(
                     controller: _fnameController,

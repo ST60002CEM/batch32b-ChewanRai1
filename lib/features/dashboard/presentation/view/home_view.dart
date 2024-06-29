@@ -42,12 +42,6 @@ class _HomeScreenState extends ConsumerState<HomeView> {
     });
   }
 
-  final List<String> images = [
-    'assets/images/upkeep.jpeg',
-    'assets/images/energy.jpeg',
-  ];
-  int currentSlide = 0;
-
   @override
   Widget build(BuildContext context) {
     Size mediaSize = MediaQuery.of(context).size;
@@ -60,12 +54,10 @@ class _HomeScreenState extends ConsumerState<HomeView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _topBar(),
                 _searchBar(),
                 const SizedBox(
                   height: 10,
                 ),
-                _homeSlider(mediaSize),
                 _categorySection(),
                 const SizedBox(height: 10),
                 _recentPostsSection(mediaSize, state),
@@ -74,22 +66,6 @@ class _HomeScreenState extends ConsumerState<HomeView> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _topBar() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.category),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.message),
-        )
-      ],
     );
   }
 
@@ -123,61 +99,6 @@ class _HomeScreenState extends ConsumerState<HomeView> {
     );
   }
 
-  Widget _homeSlider(Size mediaSize) {
-    return Stack(
-      children: [
-        SizedBox(
-          height: mediaSize.height * 0.20,
-          width: mediaSize.width,
-          child: PageView.builder(
-            onPageChanged: (value) {
-              setState(() {
-                currentSlide = value;
-              });
-            },
-            itemCount: images.length,
-            itemBuilder: (context, index) {
-              return Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  image: DecorationImage(
-                    image: AssetImage(images[index]),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-        Positioned.fill(
-          bottom: 10,
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                images.length,
-                (index) => AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  width: currentSlide == index ? 15 : 8,
-                  height: 8,
-                  margin: const EdgeInsets.only(right: 4),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: currentSlide == index
-                        ? Colors.black
-                        : Colors.transparent,
-                    border: Border.all(color: Colors.black),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        )
-      ],
-    );
-  }
-
   Widget _categoryItem({required IconData icon, required String label}) {
     return Column(
       children: [
@@ -191,12 +112,13 @@ class _HomeScreenState extends ConsumerState<HomeView> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _categoryItem(icon: Icons.mobile_friendly, label: 'Mobile'),
-          _categoryItem(icon: Icons.computer, label: 'Computer'),
-          _categoryItem(icon: Icons.house, label: 'Real Estate'),
-          _categoryItem(icon: Icons.airport_shuttle, label: 'Vechiles'),
+          _categoryItem(icon: Icons.cleaning_services, label: 'Cleaner'),
+          _categoryItem(icon: Icons.electrical_services, label: 'Electrician'),
+          _categoryItem(icon: Icons.plumbing, label: 'Plumber'),
+          _categoryItem(icon: Icons.format_paint, label: 'Painter'),
+          _categoryItem(icon: Icons.more_horiz, label: 'More..'),
         ],
       ),
     );
@@ -218,20 +140,15 @@ class _HomeScreenState extends ConsumerState<HomeView> {
       },
       child: SizedBox(
         height: mediaSize.height * 0.6,
-        child: GridView.builder(
+        child: ListView.builder(
           physics: const AlwaysScrollableScrollPhysics(),
           controller: _scrollController,
           shrinkWrap: true,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-            childAspectRatio: 0.75,
-          ),
           itemCount: state.lstposts.length,
           itemBuilder: (context, index) {
             final post = state.lstposts[index];
             return Container(
+              margin: const EdgeInsets.symmetric(vertical: 5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.white,
@@ -247,49 +164,18 @@ class _HomeScreenState extends ConsumerState<HomeView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: Container(
-                      height: mediaSize.height * 0.25,
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
-                        ),
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            '${ApiEndpoints.imageUrl}${post.productImage}',
-                          ),
-                          fit: BoxFit.cover,
-                        ),
+                  Container(
+                    height: mediaSize.height * 0.25,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
                       ),
-                      child: Stack(
-                        children: [
-                          // Positioned(
-                          //   top: 10,
-                          //   right: 10,
-                          //   child: CircleAvatar(
-                          //     backgroundColor: Colors.white,
-                          //     // child: IconButton(
-                          //     //   icon: const Icon(Icons.favorite_border,
-                          //     //       color: Colors.red),
-                          //     //   onPressed: () {},
-                          //     // ),
-                          //     // child: Text(post.condition),
-                          //   ),
-                          // ),
-                          // Positioned(
-                          //   top: 10,
-                          //   left: 10,
-                          //   child: Container(
-                          //     padding: const EdgeInsets.symmetric(
-                          //         horizontal: 8, vertical: 4),
-                          //     decoration: BoxDecoration(
-                          //       color: Colors.green,
-                          //       borderRadius: BorderRadius.circular(20),
-                          //     ),
-                          //   ),
-                          // ),
-                        ],
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          '${ApiEndpoints.imageUrl}${post.productImage}',
+                        ),
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),

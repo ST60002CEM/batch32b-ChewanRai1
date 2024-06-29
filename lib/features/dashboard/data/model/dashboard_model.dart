@@ -3,7 +3,7 @@ import 'package:finalproject/features/dashboard/domain/entity/dashboard_entity.d
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-final dashboardtModelProvider = Provider((ref) {
+final dashboardModelProvider = Provider((ref) {
   return DashboardModel.empty();
 });
 
@@ -11,7 +11,7 @@ final dashboardtModelProvider = Provider((ref) {
 class DashboardModel {
   @JsonKey(name: '_id')
   final String productId;
-  final String productTitle;
+  final String productName;
   final int productPrice;
   final String productDescription;
   final String productCategory;
@@ -20,7 +20,7 @@ class DashboardModel {
 
   const DashboardModel({
     required this.productId,
-    required this.productTitle,
+    required this.productName,
     required this.productPrice,
     required this.productDescription,
     required this.productCategory,
@@ -31,7 +31,7 @@ class DashboardModel {
   factory DashboardModel.fromJson(Map<String, dynamic> json) {
     return DashboardModel(
       productId: json['_id'],
-      productTitle: json['productTitle'],
+      productName: json['productName'],
       productDescription: json['productDescription'],
       productCategory: json['productCategory'],
       productPrice: json['productPrice'],
@@ -42,7 +42,7 @@ class DashboardModel {
 
   DashboardEntity toEntity() => DashboardEntity(
       productId: productId,
-      productTitle: productTitle,
+      productName: productName,
       productDescription: productDescription,
       productCategory: productCategory,
       productPrice: productPrice,
@@ -51,7 +51,7 @@ class DashboardModel {
 
   DashboardModel.empty()
       : productId = '',
-        productTitle = '',
+        productName = '',
         productDescription = '',
         productCategory = '',
         productPrice = 0,

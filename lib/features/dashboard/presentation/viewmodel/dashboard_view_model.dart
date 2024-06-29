@@ -1,9 +1,7 @@
-import 'package:finalproject/core/common/provider/providers.dart';
 import 'package:finalproject/features/dashboard/data/data_source/remote/dashboard_remote_data_source.dart';
 import 'package:finalproject/features/dashboard/presentation/navigator/dashboard_navigator.dart';
 import 'package:finalproject/features/dashboard/presentation/state/dashboard_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 
 final dashboardViewModelProvider =
     StateNotifierProvider<DashboardViewModel, DashboardState>((ref) {
@@ -29,14 +27,13 @@ class DashboardViewModel extends StateNotifier<DashboardState> {
   Future getPosts({int? page}) async {
     state = state.copyWith(isLoading: true);
     final currentState = state;
-    final currentPage = page ??
-        currentState.page + 1; // Use provided page or increment current page
+    final currentPage = page ?? currentState.page + 1;
     final posts = currentState.lstposts;
     final hasReachedMax = currentState.hasReachedMax;
-
     if (!hasReachedMax) {
-      // get the data from data source
+      // get data from data source
       final result = await _postsDataSource.getAllPosts(currentPage);
+      print("result $result");
       result.fold(
         (failure) =>
             state = state.copyWith(hasReachedMax: true, isLoading: false),
@@ -44,9 +41,10 @@ class DashboardViewModel extends StateNotifier<DashboardState> {
           if (data.isEmpty) {
             state = state.copyWith(hasReachedMax: true);
           } else {
+            print("data $data");
             state = state.copyWith(
               lstposts: [...posts, ...data],
-              page: currentPage,
+              page: page,
               isLoading: false,
             );
           }

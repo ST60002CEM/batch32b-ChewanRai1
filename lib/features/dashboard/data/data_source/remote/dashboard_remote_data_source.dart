@@ -16,6 +16,7 @@ final dashboardRemoteDataSourceProvider =
 class DashboardRemoteDataSource {
   final Dio _dio;
   DashboardRemoteDataSource(this._dio);
+
   Future<Either<PostFailure, List<DashboardEntity>>> getAllPosts(
       int page) async {
     try {
@@ -26,20 +27,15 @@ class DashboardRemoteDataSource {
           '_limit': ApiEndpoints.limitPage,
         },
       );
-      // final data = response.data as List;
+
       if (response.statusCode == 201) {
         final getAllPostDto = DashboardDto.fromJson(response.data);
         final posts = getAllPostDto.data.map((e) => e.toEntity()).toList();
+        print("response ${response.data}");
         return Right(posts);
       } else {
-        return const Left(
-          PostFailure(
-            message: 'Post Failed to achieved',
-          ),
-        );
+        return const Left(PostFailure(message: 'Failed to fetch posts'));
       }
-      // final posts = data.map((e) => Posts.fromJson(e)).toList();
-      // return Right(posts);
     } on DioException catch (e) {
       return Left(PostFailure(message: e.message.toString()));
     }

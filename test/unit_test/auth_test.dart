@@ -114,6 +114,31 @@ void main() {
     // Assert
     expect(authState.error, isNull);
   });
+  // test('Login test with valid username and password', body)
+  //Fail test
+  test('login test with invalid username and password', () async {
+    //comment snack bar to pass test
+    const correctPhoneNumber = '987654321';
+    const correctPassword = '12345678';
+
+    when(mockAuthUsecase.loginUser(any, any)).thenAnswer((invocation) {
+      final phoneNumber = invocation.positionalArguments[0] as String;
+      final password = invocation.positionalArguments[1] as String;
+
+      return Future.value(
+          phoneNumber == correctPhoneNumber && password == correctPassword
+              ? const Right(true)
+              : Left(Failure(error: 'Invalid')));
+    });
+
+    await container
+        .read(authViewModelProvider.notifier)
+        .loginUser('98756789', '51764');
+
+    final loginState = container.read(authViewModelProvider);
+
+    expect(loginState.error, isNull);
+  });
   tearDown(
     () {
       container.dispose();

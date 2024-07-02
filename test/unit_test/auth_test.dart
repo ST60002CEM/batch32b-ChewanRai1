@@ -66,8 +66,54 @@ void main() {
     // Assert
     expect(authState.error, isNull);
   });
+  test('register test with valid details', () async {
+    //comment snack bar to pass test
+    const correctFirstName = 'Chewan';
+    const correctLastName = 'Rai';
+    const correctPhone = '9812345678';
+    const correctImage = '';
+    const correctEmail = 'crai@gmail.com';
+    const correctUsername = 'chewan';
+    const correctPassword = '123qwe';
 
+    AuthEntity entity = const AuthEntity(
+        fname: correctFirstName,
+        lname: correctLastName,
+        phone: correctPhone,
+        image: correctImage,
+        email: correctEmail,
+        username: correctUsername,
+        password: correctPassword);
 
+    when(mockAuthUsecase.registerUser(entity)).thenAnswer((invocation) {
+      final entity = invocation.positionalArguments[0] as AuthEntity;
+
+      return Future.value(entity.fname == correctFirstName &&
+              entity.lname == correctLastName &&
+              entity.phone == correctPhone &&
+              entity.image == correctImage &&
+              entity.email == correctEmail &&
+              entity.username == correctUsername &&
+              entity.password == correctPassword
+          ? const Right(true)
+          : Left(Failure(error: 'Invalid')));
+    });
+
+    await container.read(authViewModelProvider.notifier).registerUser(
+        const AuthEntity(
+            fname: 'Chewan',
+            lname: 'Rai',
+            phone: '9812345678',
+            image: '',
+            email: 'crai@gmail.com',
+            username: 'chewan',
+            password: '123qwe'));
+
+    final authState = container.read(authViewModelProvider);
+
+    // Assert
+    expect(authState.error, isNull);
+  });
   tearDown(
     () {
       container.dispose();

@@ -46,7 +46,21 @@ void main() {
     expect(productState.errorMessage, isNull);
     expect(productState.lstProducts, isNotEmpty);
   });
+  test('get all products test', () async {
+    // Arrange
+    final userList = ProductTestData().lstProducts;
+    when(mockProductsDataSource.getAllPosts(1))
+        .thenAnswer((_) => Future.value(Right(userList)));
 
+    // Act
+    await container.read(dashboardViewModelProvider.notifier).getAllPosts();
+
+    final productState = container.read(dashboardViewModelProvider);
+
+    // Assert
+    expect(productState.lstProducts, userList);
+    expect(productState.errorMessage, isNull);
+  });
   tearDown(() {
     container.dispose();
   });

@@ -17,7 +17,14 @@ class _HomeScreenState extends ConsumerState<HomeView> {
   int currentPage = 1;
 
   @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  @override
   void dispose() {
+    _scrollController.removeListener(_scrollListener);
     _scrollController.dispose();
     super.dispose();
   }
@@ -42,26 +49,40 @@ class _HomeScreenState extends ConsumerState<HomeView> {
     });
   }
 
+  Future<void> _refreshPosts() async {
+    await ref.read(dashboardViewModelProvider.notifier).resetState();
+    setState(() {
+      currentPage = 1;
+      isLoading = false;
+    });
+    await _loadMorePosts();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size mediaSize = MediaQuery.of(context).size;
     final state = ref.watch(dashboardViewModelProvider);
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _searchBar(),
-                const SizedBox(
-                  height: 10,
-                ),
-                _categorySection(),
-                const SizedBox(height: 10),
-                _recentPostsSection(mediaSize, state),
-              ],
+        child: RefreshIndicator(
+          color: Colors.green,
+          backgroundColor: Colors.amberAccent,
+          onRefresh: _refreshPosts,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _searchBar(),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  _categorySection(),
+                  const SizedBox(height: 10),
+                  _recentPostsSection(mediaSize, state),
+                ],
+              ),
             ),
           ),
         ),
@@ -125,7 +146,7 @@ class _HomeScreenState extends ConsumerState<HomeView> {
   }
 
   Widget _recentPostsSection(Size mediaSize, DashboardState state) {
-    return NotificationListener(
+    return NotificationListener<ScrollNotification>(
       onNotification: (notification) {
         if (notification is ScrollEndNotification &&
             _scrollController.position.extentAfter == 0) {
@@ -144,8 +165,12 @@ class _HomeScreenState extends ConsumerState<HomeView> {
           physics: const AlwaysScrollableScrollPhysics(),
           controller: _scrollController,
           shrinkWrap: true,
-          itemCount: state.lstposts.length,
+          itemCount: state.lstposts.length + (isLoading ? 1 : 0),
           itemBuilder: (context, index) {
+            if (index == state.lstposts.length) {
+              return const Center(
+                  child: CircularProgressIndicator(color: Colors.red));
+            }
             final post = state.lstposts[index];
             return Container(
               margin: const EdgeInsets.symmetric(vertical: 5),

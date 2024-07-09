@@ -24,6 +24,10 @@ class DashboardState {
     );
   }
 
+  get errorMessage => null;
+
+  get lstProducts => null;
+
   DashboardState copyWith({
     List<DashboardEntity>? lstposts,
     bool? hasReachedMax,

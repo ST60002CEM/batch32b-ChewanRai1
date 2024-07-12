@@ -25,6 +25,6 @@ class AuthUseCase {
 
   Future<Either<Failure, bool>> loginUser(
       String? email, String? password) async {
-    return await _authRepository.loginUser(email??"", password??"");
+    return await _authRepository.loginUser(email ?? "", password ?? "");
   }
 }

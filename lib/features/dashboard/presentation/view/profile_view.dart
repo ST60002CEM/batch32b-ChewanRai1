@@ -2,6 +2,8 @@ import 'package:finalproject/features/dashboard/presentation/view/plan_view.dart
 import 'package:flutter/material.dart';
 
 class ProfileView extends StatelessWidget {
+  const ProfileView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,7 +12,7 @@ class ProfileView extends StatelessWidget {
         elevation: 0,
       ),
       body: ListView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         children: [
           // Profile Header
           const Row(
@@ -43,7 +45,7 @@ class ProfileView extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
 
           // Menu Items
           MenuItem(
@@ -59,7 +61,7 @@ class ProfileView extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PlanView()),
+                MaterialPageRoute(builder: (context) => const PlanView()),
               );
 
               // Navigate to monthly plans screen
@@ -86,18 +88,18 @@ class ProfileView extends StatelessWidget {
               // Navigate to help and terms of use screen
             },
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
 
           // Log Out
           ListTile(
-            title: Text(
+            title: const Text(
               'Log Out',
               style: TextStyle(
                 color: Colors.red,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            trailing: Icon(
+            trailing: const Icon(
               Icons.arrow_forward_ios,
               color: Colors.red,
             ),
@@ -118,7 +120,7 @@ class MenuItem extends StatelessWidget {
   final String subtitle;
   final VoidCallback onTap;
 
-  const MenuItem({
+  const MenuItem({super.key, 
     required this.title,
     required this.subtitle,
     required this.onTap,
@@ -129,12 +131,12 @@ class MenuItem extends StatelessWidget {
     return ListTile(
       title: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
         ),
       ),
       subtitle: Text(subtitle),
-      trailing: Icon(Icons.arrow_forward_ios),
+      trailing: const Icon(Icons.arrow_forward_ios),
       onTap: onTap,
     );
   }

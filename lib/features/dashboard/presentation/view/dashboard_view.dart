@@ -22,20 +22,14 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
     const PlanView(),
     const InboxView(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
+        title: const Row(
           children: [
-            // Uncomment the following lines if you want to show the logo
-            // Image.asset(
-            //   'assets/images/logo.png',
-            //   height: 37.0,
-            //   width: 37.0,
-            // ),
-            // const SizedBox(width: 0.0),
-            const Text(
+            Text(
               'HandyHelper',
               style: TextStyle(
                 fontSize: 24,
@@ -54,7 +48,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ProfileView()),
+                MaterialPageRoute(builder: (context) => const ProfileView()),
               );
             },
           ),

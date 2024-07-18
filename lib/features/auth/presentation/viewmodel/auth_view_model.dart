@@ -7,11 +7,11 @@ import 'package:finalproject/features/auth/presentation/navigator/login_navigato
 import 'package:finalproject/features/auth/presentation/state/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:student_management_starter/core/common/my_snackbar.dart';
-// import 'package:student_management_starter/features/auth/domain/entity/auth_entity.dart';
-// import 'package:student_management_starter/features/auth/domain/usecases/auth_usecase.dart';
-// import 'package:student_management_starter/features/auth/presentation/navigator/login_navigator.dart';
-// import 'package:student_management_starter/features/auth/presentation/state/auth_state.dart';
+// import 'package:user_management_starter/core/common/my_snackbar.dart';
+// import 'package:user_management_starter/features/auth/domain/entity/auth_entity.dart';
+// import 'package:user_management_starter/features/auth/domain/usecases/auth_usecase.dart';
+// import 'package:user_management_starter/features/auth/presentation/navigator/login_navigator.dart';
+// import 'package:user_management_starter/features/auth/presentation/state/auth_state.dart';
 
 final authViewModelProvider = StateNotifierProvider<AuthViewModel, AuthState>(
   (ref) => AuthViewModel(
@@ -39,9 +39,9 @@ class AuthViewModel extends StateNotifier<AuthState> {
     );
   }
 
-  Future<void> registerStudent(AuthEntity student) async {
+  Future<void> registerUser(AuthEntity user) async {
     state = state.copyWith(isLoading: true);
-    var data = await authUseCase.registerStudent(student);
+    var data = await authUseCase.registerUser(user);
     data.fold(
       (failure) {
         state = state.copyWith(
@@ -49,21 +49,21 @@ class AuthViewModel extends StateNotifier<AuthState> {
           error: failure.error,
           // error: failure.error,
         );
-        showMySnackBar(message: failure.error, color: Colors.red);
+        // showMySnackBar(message: failure.error, color: Colors.red);
       },
       (success) {
         state = state.copyWith(isLoading: false, error: null);
-        showMySnackBar(message: "Successfully registered");
+        // showMySnackBar(message: "Successfully registered");
       },
     );
   }
 
-  Future<void> loginStudent(
+  Future<void> loginUser(
     String email,
     String password,
   ) async {
     state = state.copyWith(isLoading: true);
-    var data = await authUseCase.loginStudent(email, password);
+    var data = await authUseCase.loginUser(email, password);
     data.fold(
       (failure) {
         state = state.copyWith(isLoading: false, error: failure.error);

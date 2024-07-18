@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:finalproject/features/auth/domain/entity/auth_entity.dart';
 import 'package:finalproject/features/auth/presentation/viewmodel/auth_view_model.dart';
-import 'package:finalproject/features/auth/presentation/viewmodel/register_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -65,56 +64,55 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
               key: _key,
               child: Column(
                 children: [
-                  InkWell(
-                    onTap: () {
-                      showModalBottomSheet(
-                        backgroundColor: Colors.grey[300],
-                        context: context,
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(20),
-                          ),
-                        ),
-                        builder: (context) => Padding(
-                          padding: const EdgeInsets.all(20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              ElevatedButton.icon(
-                                onPressed: () {
-                                  checkCameraPermission();
-                                  _browseImage(ref, ImageSource.camera);
-                                  Navigator.pop(context);
-                                },
-                                icon: const Icon(Icons.camera),
-                                label: const Text('Camera'),
-                              ),
-                              ElevatedButton.icon(
-                                onPressed: () {
-                                  _browseImage(ref, ImageSource.gallery);
-                                  Navigator.pop(context);
-                                },
-                                icon: const Icon(Icons.image),
-                                label: const Text('Gallery'),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                    child: SizedBox(
-                      height: 200,
-                      width: 200,
-                      child: CircleAvatar(
-                        radius: 50,
-                        backgroundImage: _img != null
-                            ? FileImage(_img!)
-                            : const AssetImage('assets/images/profile.png')
-                                as ImageProvider,
-                      ),
-                    ),
-                  ),
+                  // InkWell(
+                  //   onTap: () {
+                  //     showModalBottomSheet(
+                  //       backgroundColor: Colors.grey[300],
+                  //       context: context,
+                  //       isScrollControlled: true,
+                  //       shape: const RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.vertical(
+                  //           top: Radius.circular(20),
+                  //         ),
+                  //       ),
+                  //       builder: (context) => Padding(
+                  //         padding: const EdgeInsets.all(20),
+                  //         child: Row(
+                  //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //           children: [
+                  //             ElevatedButton.icon(
+                  //               onPressed: () {
+                  //                 checkCameraPermission();
+                  //                 _browseImage(ref, ImageSource.camera);
+                  //                 Navigator.pop(context);
+                  //               },
+                  //               icon: const Icon(Icons.camera),
+                  //               label: const Text('Camera'),
+                  //             ),
+                  //             ElevatedButton.icon(
+                  //               onPressed: () {
+                  //                 _browseImage(ref, ImageSource.gallery);
+                  //                 Navigator.pop(context);
+                  //               },
+                  //               icon: const Icon(Icons.image),
+                  //               label: const Text('Gallery'),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       ),
+                  //     );
+                  //   },
+                  //   child: SizedBox(
+                  //     height: 200,
+                  //     width: 200,
+                  //     child: CircleAvatar(
+                  //       radius: 50,
+                  //       backgroundImage: _img != null
+                  //           ? FileImage(_img!)
+                  //           : const AssetImage('') as ImageProvider,
+                  //     ),
+                  //   ),
+                  // ),
                   const SizedBox(height: 25),
                   TextFormField(
                     controller: _fnameController,
@@ -213,7 +211,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (_key.currentState!.validate()) {
-                          var student = AuthEntity(
+                          var user = AuthEntity(
                             fname: _fnameController.text,
                             lname: _lnameController.text,
                             image:
@@ -226,7 +224,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
 
                           ref
                               .read(authViewModelProvider.notifier)
-                              .registerStudent(student);
+                              .registerUser(user);
                         }
                       },
                       child: const Text('Register'),

@@ -1,5 +1,3 @@
-
-
 import 'package:finalproject/features/dashboard/domain/entity/dashboard_entity.dart';
 
 class DashboardState {
@@ -25,7 +23,6 @@ class DashboardState {
   }
 
   get errorMessage => null;
-
   get lstServices => null;
 
   DashboardState copyWith({

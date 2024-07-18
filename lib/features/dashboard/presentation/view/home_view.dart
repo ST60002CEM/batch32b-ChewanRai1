@@ -198,7 +198,7 @@ class _HomeScreenState extends ConsumerState<HomeView> {
                       ),
                       image: DecorationImage(
                         image: NetworkImage(
-                          '${ApiEndpoints.imageUrl}${post.productImage}',
+                          '${ApiEndpoints.imageUrl}${post.serviceImage}',
                         ),
                         fit: BoxFit.cover,
                       ),
@@ -207,7 +207,7 @@ class _HomeScreenState extends ConsumerState<HomeView> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      post.productName,
+                      post.serviceName,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
@@ -219,7 +219,7 @@ class _HomeScreenState extends ConsumerState<HomeView> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
-                      'Rs ${post.productPrice}',
+                      'Rs ${post.servicePrice}',
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

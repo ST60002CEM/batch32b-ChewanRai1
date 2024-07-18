@@ -1,3 +1,8 @@
+import 'dart:async';
+
+import 'package:all_sensors2/all_sensors2.dart';
+import 'package:finalproject/core/common/my_snackbar.dart';
+import 'package:finalproject/core/common/my_yes_no_dialog.dart';
 import 'package:finalproject/features/auth/presentation/viewmodel/auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,11 +16,57 @@ class LoginView extends ConsumerStatefulWidget {
 
 class _LoginViewState extends ConsumerState<LoginView> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController(text: 'Chewan@gmail.com');
-  final _passwordController = TextEditingController(text: 'chewan123');
+  final _emailController = TextEditingController(text: 'crai@gmail.com');
+  final _passwordController = TextEditingController(text: '1234qwer');
 
   bool _isPasswordVisible = false;
   bool isObscure = true;
+  bool showYesNoDialog = true;
+  bool isDialogShowing = false;
+
+  List<double> _gyroscopeValues = [];
+  final List<StreamSubscription<dynamic>> _streamSubscription = [];
+
+  @override
+  void initState() {
+    _streamSubscription.add(gyroscopeEvents!.listen((GyroscopeEvent event) {
+      setState(() {
+        _gyroscopeValues = <double>[event.x, event.y, event.z];
+
+        _checkGyroscopeValues(_gyroscopeValues);
+      });
+    }));
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    for (final subscription in _streamSubscription) {
+      subscription.cancel();
+    }
+    super.dispose();
+  }
+
+  void _checkGyroscopeValues(List<double> values) async {
+    const double threshold = 5; // Example threshold value, adjust as needed
+    if (values.any((value) => value.abs() > threshold)) {
+      if (showYesNoDialog && !isDialogShowing) {
+        isDialogShowing = true;
+        final result = await myYesNoDialog(
+          title: 'Are you sure you want to send feedback?',
+        );
+        isDialogShowing = false;
+        if (result) {
+          showMySnackBar(
+            message: 'Feedback sent',
+            color: Colors.green,
+          );
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -151,7 +202,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                           if (_formKey.currentState!.validate()) {
                             await ref
                                 .read(authViewModelProvider.notifier)
-                                .loginStudent(
+                                .loginUser(
                                   _emailController.text,
                                   _passwordController.text,
                                 );

@@ -15,7 +15,11 @@ final authRepositoryProvider = Provider<IAuthRepository>((ref) {
   if (checkConnectivity == ConnectivityStatus.isConnected) {
     return ref.read(authRemoteRepositoryProvider);
   } else {
-    return ref.read(authLocalRepositoryProvider);
+    //not works just to ignore error for logoutuser remotely
+    // return ref.read(authLocalRepositoryProvider);
+
+    //working purely on remote.
+    return ref.read(authRemoteRepositoryProvider);
   }
 });
 
@@ -23,4 +27,5 @@ abstract class IAuthRepository {
   Future<Either<Failure, bool>> registerUser(AuthEntity user);
   Future<Either<Failure, bool>> loginUser(String email, String password);
   Future<Either<Failure, String>> uploadProfilePicture(File file);
+  Future<Either<Failure, bool>> logoutUser();
 }

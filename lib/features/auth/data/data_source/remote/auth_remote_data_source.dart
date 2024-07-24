@@ -126,6 +126,18 @@ class AuthRemoteDataSource {
     }
   }
 
+  Future<Either<Failure, bool>> logoutUser() async {
+    try {
+      final result = await userSharedPrefs.deleteUserToken();
+      return result.fold(
+        (failure) => Left(failure),
+        (success) => const Right(true),
+      );
+    } catch (e) {
+      return Left(Failure(error: e.toString()));
+    }
+  }
+
   Future<Either<Failure, AuthEntity>> getCurrentUser() async {
     try {
       // Get the token from shared prefs

@@ -76,11 +76,30 @@ class AuthViewModel extends StateNotifier<AuthState> {
     );
   }
 
+  Future<void> logoutUser() async {
+    state = state.copyWith(isLoading: true);
+    var data = await authUseCase.logoutUser();
+    data.fold(
+      (failure) {
+        state = state.copyWith(isLoading: false, error: failure.error);
+        showMySnackBar(message: failure.error, color: Colors.red);
+      },
+      (success) {
+        state = state.copyWith(isLoading: false, error: null);
+        openLoginView();
+      },
+    );
+  }
+
   void openRegisterView() {
     navigator.openRegisterView();
   }
 
   void openHomeView() {
     navigator.openDashboardView();
+  }
+
+  void openLoginView() {
+    navigator.openLoginView();
   }
 }

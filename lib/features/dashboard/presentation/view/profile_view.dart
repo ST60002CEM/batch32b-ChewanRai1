@@ -1,11 +1,17 @@
+import 'package:finalproject/features/auth/presentation/viewmodel/auth_view_model.dart';
 import 'package:finalproject/features/dashboard/presentation/view/plan_view.dart';
+import 'package:finalproject/features/logout/presentation/viewmodel/logout_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:finalproject/core/common/my_yes_no_dialog.dart';
 
-class ProfileView extends StatelessWidget {
+class ProfileView extends ConsumerWidget {
   const ProfileView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final logoutState = ref.watch(authViewModelProvider);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -103,24 +109,37 @@ class ProfileView extends StatelessWidget {
               Icons.arrow_forward_ios,
               color: Colors.red,
             ),
-            onTap: () {
-              // Handle log out
+            onTap: () async {
+              final confirmed = await myYesNoDialog(
+                  title: "Are you sure you want to log out?");
+              if (confirmed) {
+                await ref.read(authViewModelProvider.notifier).logoutUser();
+                if (!context.mounted) return;
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/login', (Route<dynamic> route) => false);
+              }
             },
           ),
+          if (logoutState is AsyncError) ...[
+            const SizedBox(height: 8),
+            Text(
+              logoutState.error.toString(),
+              style: const TextStyle(color: Colors.red),
+            ),
+          ],
         ],
       ),
     );
   }
 }
 
-class _screens {}
-
 class MenuItem extends StatelessWidget {
   final String title;
   final String subtitle;
   final VoidCallback onTap;
 
-  const MenuItem({super.key, 
+  const MenuItem({
+    super.key,
     required this.title,
     required this.subtitle,
     required this.onTap,

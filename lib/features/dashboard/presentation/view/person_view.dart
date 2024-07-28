@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:finalproject/core/common/my_yes_no_dialog.dart';
 
-class ProfileView extends ConsumerWidget {
-  const ProfileView({super.key});
+class PersonView extends ConsumerWidget {
+  const PersonView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

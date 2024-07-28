@@ -1,8 +1,7 @@
 import 'package:finalproject/features/dashboard/presentation/view/home_view.dart';
 import 'package:finalproject/features/dashboard/presentation/view/inbox_view.dart';
 import 'package:finalproject/features/dashboard/presentation/view/plan_view.dart';
-import 'package:finalproject/features/dashboard/presentation/view/profile_view.dart';
-import 'package:finalproject/features/dashboard/presentation/view/search_view.dart';
+import 'package:finalproject/features/dashboard/presentation/view/person_view.dart';
 import 'package:finalproject/features/search/presentation/view/search_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -49,7 +48,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ProfileView()),
+                MaterialPageRoute(builder: (context) => const PersonView()),
               );
             },
           ),

@@ -134,6 +134,31 @@ class MockAuthUseCase extends _i1.Mock implements _i3.AuthUseCase {
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, bool>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, bool>> logoutUser() => (super.noSuchMethod(
+        Invocation.method(
+          #logoutUser,
+          [],
+        ),
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, bool>>.value(
+            _FakeEither_0<_i5.Failure, bool>(
+          this,
+          Invocation.method(
+            #logoutUser,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i5.Failure, bool>>.value(
+                _FakeEither_0<_i5.Failure, bool>(
+          this,
+          Invocation.method(
+            #logoutUser,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, bool>>);
 }
 
 /// A class which mocks [LoginViewNavigator].
@@ -145,6 +170,15 @@ class MockLoginViewNavigator extends _i1.Mock
   void openDashboardView() => super.noSuchMethod(
         Invocation.method(
           #openDashboardView,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void openLoginView() => super.noSuchMethod(
+        Invocation.method(
+          #openLoginView,
           [],
         ),
         returnValueForMissingStub: null,

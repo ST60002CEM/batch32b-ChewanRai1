@@ -1,5 +1,6 @@
 import 'package:finalproject/features/auth/presentation/viewmodel/auth_view_model.dart';
 import 'package:finalproject/features/dashboard/presentation/view/plan_view.dart';
+import 'package:finalproject/features/profile/presentation/view/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:finalproject/core/common/my_yes_no_dialog.dart';
@@ -57,7 +58,12 @@ class PersonView extends ConsumerWidget {
             title: 'Your Info',
             subtitle: 'Profile and Address',
             onTap: () {
-              // Navigate to your info screen
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfileView(),
+                ),
+              );
             },
           ),
           MenuItem(

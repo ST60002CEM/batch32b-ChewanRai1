@@ -105,7 +105,15 @@ class AuthRemoteDataSource {
       );
       if (response.statusCode == 200) {
         String token = response.data["token"];
-        // Save token to shared prefs
+        final Map<String, dynamic> data = response.data;
+        final Map<String, dynamic> userData = data['userData'];
+
+        // Now safely extract the id
+        String id = userData['_id'];
+        // print('Id:' + id);
+        //Setting user id in shared pereference
+        await userSharedPrefs.setUserId(id);
+        // save token to shared prefs
         await userSharedPrefs.setUserToken(token);
         return const Right(true);
       } else {

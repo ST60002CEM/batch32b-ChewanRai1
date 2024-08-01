@@ -53,8 +53,7 @@ dependencies:
   mongo_dart: ^0.10.2
   provider: ^6.0.3
   connectivity_plus: ^4.0.1
-
-  json_annotation: any
+  json_annotation: ^4.9.0
   mockito: ^5.4.4
   all_sensors2: ^1.0.1
 dev_dependencies:

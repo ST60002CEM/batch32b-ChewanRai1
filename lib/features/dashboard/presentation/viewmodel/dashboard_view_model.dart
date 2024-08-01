@@ -56,4 +56,6 @@ class DashboardViewModel extends StateNotifier<DashboardState> {
   void openPostPage() {
     // code here
   }
+
+  getAllPosts() {}
 }

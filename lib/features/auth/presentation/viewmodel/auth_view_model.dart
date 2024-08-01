@@ -49,11 +49,11 @@ class AuthViewModel extends StateNotifier<AuthState> {
           error: failure.error,
           // error: failure.error,
         );
-        showMySnackBar(message: failure.error, color: Colors.red);
+        // showMySnackBar(message: failure.error, color: Colors.red);
       },
       (success) {
         state = state.copyWith(isLoading: false, error: null);
-        showMySnackBar(message: "Successfully registered");
+        // showMySnackBar(message: "Successfully registered");
       },
     );
   }

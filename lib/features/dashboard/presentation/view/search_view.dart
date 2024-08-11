@@ -16,4 +16,4 @@ class _SearchViewState extends State<SearchView> {
       ),
     );
   }
-}
+}// presentation/view/search_view.dart (modified)

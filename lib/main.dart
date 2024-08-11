@@ -4,8 +4,6 @@ import 'package:finalproject/core/networking/local/hive_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'mongodb.dart';
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await HiveService().init();

@@ -7,16 +7,20 @@ class ApiEndpoints {
   //static const String baseUrl = "http://192.168.4.4:3000/api/v1/";
 
   // ====================== Auth Routes ======================
-  static const String login = "login";
-  static const String register = "create";
-  static const String getAllStudent = "auth/getAllStudents";
-  static const String getStudentsByBatch = "auth/getStudentsByBatch/";
-  static const String getStudentsByCourse = "auth/getStudentsByCourse/";
-  static const String updateStudent = "auth/updateStudent/";
-  static const String deleteStudent = "auth/deleteStudent/";
-  static const String imageUrl = "http://localhost:8000/uploads/";
+  static const String login = "user/login";
+  static const String register = "user/create";
+  static const String getAlluser = "auth/getAllusers";
+  static const String getusersByBatch = "auth/getusersByBatch/";
+  static const String getusersByCourse = "auth/getusersByCourse/";
+  static const String updateuser = "auth/updateuser/";
+  static const String deleteuser = "auth/deleteuser/";
+  static const String imageUrl = "http://localhost:8000/services/";
   static const String uploadImage = "auth/uploadImage";
   static const String currentUser = "auth/getMe";
+  static const String pagination = "service/pagination";
+  static const String photos = "photos";
+
+  static const limitPage = 20;
 
   // ====================== Batch Routes ======================
   static const String createBatch = "batch/createBatch";

@@ -1,3 +1,4 @@
+
 import 'package:finalproject/features/dashboard/domain/entity/dashboard_entity.dart';
 
 class DashboardState {

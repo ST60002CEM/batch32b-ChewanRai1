@@ -1,5 +1,4 @@
 import 'package:finalproject/features/dashboard/domain/entity/dashboard_entity.dart';
-
 class ServiceTestData {
   List<DashboardEntity> lstServices = [
     const DashboardEntity(

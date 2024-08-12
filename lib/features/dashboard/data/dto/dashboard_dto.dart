@@ -5,7 +5,7 @@ part 'dashboard_dto.g.dart';
 @JsonSerializable()
 class DashboardDto {
   final bool success;
-  @JsonKey(name: 'products', defaultValue: [])
+  @JsonKey(name: 'services', defaultValue: [])
   final List<DashboardModel> data;
 
   DashboardDto({

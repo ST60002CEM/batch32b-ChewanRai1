@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:finalproject/features/dashboard/domain/entity/dashboard_entity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:json_annotation/json_annotation.dart';

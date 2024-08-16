@@ -21,7 +21,24 @@ class ApiEndpoints {
   static const String pagination = "service/pagination";
   static const String photos = "photos";
 
+  static const String createPost = "service/create/";
+  static const String userPosts = "service/get_all_service_by_userid/";
+  static const String deletePost = "/service/delete_service/";
+  static const String getSingleService = "service/get_single_service/";
   static const limitPage = 20;
+
+  // Favorite Routes
+  static const String addFavorite = "favorites/add_favorite";
+  static const String removeFavorite = "favorites/remove_favorite/";
+  static const String getFavorites = "favorites/favorites/";
+
+  // review
+  static const String createReviews = "createReview/create_review";
+  static const String getServiceReviews = "createReview/reviews/";
+
+  // forgot routes
+  static const String forgotPassword = "user/forgot_password";
+  static const String verifyOtp = "user/verify_otp";
 
   // ====================== Batch Routes ======================
   static const String createBatch = "batch/createBatch";

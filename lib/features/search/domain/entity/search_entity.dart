@@ -15,13 +15,13 @@ class SearchQuery {
 // domain/model/search_result.dart
 // domain/model/search_result.dart
 class SearchResult {
-  final String serviceName;
+  final String serviceTitle;
   final String providerName; // Placeholder if provider data is available
   final double price;
   final String imageUrl;
 
   SearchResult({
-    required this.serviceName,
+    required this.serviceTitle,
     required this.providerName,
     required this.price,
     required this.imageUrl,

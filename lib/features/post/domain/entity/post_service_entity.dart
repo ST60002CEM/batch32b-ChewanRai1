@@ -8,6 +8,7 @@ class PostServiceEntity extends Equatable {
   final String serviceCategory;
   final String serviceLocation;
   final String serviceImage;
+  final String contact;
   final String createdBy;
 
   const PostServiceEntity({
@@ -17,6 +18,7 @@ class PostServiceEntity extends Equatable {
     required this.serviceDescription,
     required this.serviceCategory,
     required this.serviceLocation,
+    required this.contact,
     required this.serviceImage,
     required this.createdBy
   });
@@ -28,6 +30,7 @@ class PostServiceEntity extends Equatable {
         serviceDescription,
         serviceCategory,
         serviceLocation,
+        contact,
         serviceImage,
         createdBy
       ];

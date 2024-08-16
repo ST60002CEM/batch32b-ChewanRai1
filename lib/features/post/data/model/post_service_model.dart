@@ -13,6 +13,7 @@ class PostServiceModel {
   final String serviceCategory;
   final double servicePrice;
   final String serviceLocation;
+  final String contact;
   final String serviceImage;
   final String createdBy;
 
@@ -23,6 +24,7 @@ class PostServiceModel {
     required this.serviceCategory,
     required this.servicePrice,
     required this.serviceLocation,
+    required this.contact,
     required this.serviceImage,
     required this.createdBy,
   });
@@ -39,6 +41,7 @@ class PostServiceModel {
       serviceCategory: serviceCategory,
       servicePrice: servicePrice,
       serviceLocation: serviceLocation,
+      contact: contact,
       serviceImage: serviceImage,
       createdBy: createdBy,
     );

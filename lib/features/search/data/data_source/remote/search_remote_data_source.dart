@@ -15,13 +15,13 @@ class SearchRemoteDataSource {
       // Call the server's search endpoint
       final response = await _dio.post(
         'http://localhost:8000/api/service/search', // Replace with your actual server URL
-        data: {'serviceName': query.keyword},
+        data: {'serviceTitle': query.keyword},
       );
 
       if (response.statusCode == 200) {
         final data = (response.data as List)
             .map((json) => SearchResult(
-                  serviceName: json['serviceName'],
+                  serviceTitle: json['serviceTitle'],
                   providerName: json['providerName'] ??
                       '', // Assuming provider info is included
                   price: json['servicePrice'],

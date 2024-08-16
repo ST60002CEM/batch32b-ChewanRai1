@@ -15,6 +15,7 @@ class ServiceDetailModel {
   final String serviceDescription;
   final String serviceCategory;
   final String serviceLocation;
+  final String contact;
   final String serviceImage;
   final String createdAt;
 
@@ -25,6 +26,7 @@ class ServiceDetailModel {
     required this.serviceDescription,
     required this.serviceCategory,
     required this.serviceLocation,
+    required this.contact,
     required this.serviceImage,
     required this.createdAt,
   });
@@ -38,6 +40,7 @@ class ServiceDetailModel {
       serviceCategory: json['serviceCategory'] ?? '',
       servicePrice: json['servicePrice'] ?? 0,
       serviceLocation: json['serviceLocation'] ?? '',
+      contact: json['contact'] ?? '',
       serviceImage: json['serviceImage'] ?? '',
       createdAt: json['createdAt'] ?? '',
     );
@@ -50,6 +53,7 @@ class ServiceDetailModel {
       serviceCategory: serviceCategory,
       servicePrice: servicePrice,
       serviceLocation: serviceLocation,
+      contact: contact,
       serviceImage: serviceImage,
       createdAt: createdAt);
 
@@ -60,6 +64,7 @@ class ServiceDetailModel {
         serviceCategory = '',
         servicePrice = 0,
         serviceLocation = '',
+        contact = '',
         serviceImage = '',
         createdAt = '';
 }

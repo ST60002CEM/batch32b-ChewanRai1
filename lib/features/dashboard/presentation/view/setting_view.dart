@@ -2,12 +2,13 @@ import 'package:finalproject/features/auth/presentation/viewmodel/auth_view_mode
 import 'package:finalproject/features/dashboard/presentation/view/plan_view.dart';
 import 'package:finalproject/features/plan/presentation/view/plan_view.dart';
 import 'package:finalproject/features/profile/presentation/view/profile_view.dart';
+import 'package:finalproject/features/terms/terms_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:finalproject/core/common/my_yes_no_dialog.dart';
 
-class PersonView extends ConsumerWidget {
-  const PersonView({super.key});
+class SettingView extends ConsumerWidget {
+  const SettingView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -97,7 +98,12 @@ class PersonView extends ConsumerWidget {
             title: 'Help and Terms of use',
             subtitle: 'Terms and condition regarding the app',
             onTap: () {
-              // Navigate to help and terms of use screen
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TermsView(),
+                ),
+              );
             },
           ),
           const SizedBox(height: 32),

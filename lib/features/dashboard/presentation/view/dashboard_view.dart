@@ -1,6 +1,6 @@
 import 'package:finalproject/features/dashboard/presentation/view/home_view.dart';
 import 'package:finalproject/features/dashboard/presentation/view/plan_view.dart';
-import 'package:finalproject/features/dashboard/presentation/view/person_view.dart';
+import 'package:finalproject/features/dashboard/presentation/view/setting_view.dart';
 import 'package:finalproject/features/plan/presentation/view/plan_view.dart';
 import 'package:finalproject/features/post/presentation/view/post_view.dart';
 import 'package:finalproject/features/search/presentation/view/search_view.dart';
@@ -46,11 +46,11 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
         elevation: 2,
         actions: [
           IconButton(
-            icon: const Icon(Icons.person_outline),
+            icon: const Icon(Icons.settings),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const PersonView()),
+                MaterialPageRoute(builder: (context) => const SettingView()),
               );
             },
           ),

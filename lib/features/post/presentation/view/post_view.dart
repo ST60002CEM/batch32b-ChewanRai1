@@ -20,6 +20,7 @@ class _PostServiceViewState extends ConsumerState<PostServiceView> {
   final TextEditingController priceController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController contactController = TextEditingController();
   String? selectedCategory;
 
   Future<void> pickImage() async {
@@ -128,6 +129,16 @@ class _PostServiceViewState extends ConsumerState<PostServiceView> {
                 maxLines: 3,
               ),
               const SizedBox(height: 16.0),
+              TextField(
+                controller: contactController,
+                decoration: const InputDecoration(
+                  labelText: 'Contact*',
+                  border: OutlineInputBorder(),
+                ),
+                keyboardType: TextInputType
+                    .phone, // Optional: set this to phone input type
+              ),
+              const SizedBox(height: 16.0),
               GestureDetector(
                 onTap: pickImage,
                 child: Container(
@@ -168,6 +179,7 @@ class _PostServiceViewState extends ConsumerState<PostServiceView> {
                   final price = double.tryParse(priceController.text);
                   final location = locationController.text;
                   final description = descriptionController.text;
+                  final contact = contactController.text;
                   final image = imageNotifier.value;
 
                   if (title.isEmpty ||
@@ -175,6 +187,7 @@ class _PostServiceViewState extends ConsumerState<PostServiceView> {
                       selectedCategory == null ||
                       location.isEmpty ||
                       description.isEmpty ||
+                      contact.isEmpty ||
                       image == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Please fill all fields')),
@@ -190,6 +203,7 @@ class _PostServiceViewState extends ConsumerState<PostServiceView> {
                       serviceCategory: selectedCategory!,
                       servicePrice: price,
                       serviceLocation: location,
+                      contact: contact,
                       serviceImage:
                           image.path, // Assuming backend handles image uploads
                       createdBy: '', // This will be updated in the ViewModel
@@ -198,7 +212,7 @@ class _PostServiceViewState extends ConsumerState<PostServiceView> {
 
                   await postServiceViewModel.postService(postDTO, image);
                 },
-                child: const Text('Submit'),
+                child: const Text('Post my service'),
               ),
             ],
           ),

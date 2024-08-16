@@ -177,7 +177,7 @@ class _ServiceDetailViewState extends ConsumerState<ServiceDetailView> {
                         children: [
                           const CircleAvatar(
                             backgroundImage: NetworkImage(
-                                'https://th.bing.com/th/id/R.3f3b68c0fde58eea7448cef9b640e299?rik=c0t2b8nVH4v%2f2g&pid=ImgRaw&r=0'),
+                                'https://media.licdn.com/dms/image/v2/C4D03AQED_9C4b-TsYg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1663845215707?e=1729123200&v=beta&t=MOSlBSBC5KMKzwtHmcLSqtEyZxj5NzRjTaAgKBNyVUY'),
                           ),
                           const SizedBox(width: 8),
                           Column(
@@ -190,9 +190,9 @@ class _ServiceDetailViewState extends ConsumerState<ServiceDetailView> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              const Text(
-                                '(9865989542)',
-                                style: TextStyle(fontSize: 16),
+                              Text(
+                                post.contact, // Use the actual contact value here
+                                style: const TextStyle(fontSize: 16),
                               ),
                             ],
                           ),

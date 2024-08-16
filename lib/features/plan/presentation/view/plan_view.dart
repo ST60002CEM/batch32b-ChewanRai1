@@ -29,7 +29,7 @@ class _FavoriteViewState extends ConsumerState<FavoriteView> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 227, 223, 223),
         title: const Text(
-          'Favorites',
+          'Bookmarked Plans',
           style: TextStyle(
             color: Colors.black, // Change this to your desired color
             fontWeight:

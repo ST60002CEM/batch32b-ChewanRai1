@@ -90,8 +90,8 @@ class SearchView extends ConsumerWidget {
             final service = state.services[index];
             return ListTile(
               leading: Image.network(
-                  'http://localhost:8000/public/services/${service.serviceImage}'),
-              title: Text(service.serviceName),
+                  'http://localhost:8000/services/${service.serviceImage}'),
+              title: Text(service.serviceTitle),
               subtitle: Text('Rs ${service.servicePrice}'),
             );
           },

@@ -48,6 +48,7 @@ class PostServiceViewModel extends StateNotifier<PostServiceState> {
         serviceCategory: postDTO.service.serviceCategory,
         servicePrice: postDTO.service.servicePrice,
         serviceLocation: postDTO.service.serviceLocation,
+        contact: postDTO.service.contact,
         serviceImage: postDTO.service.serviceImage,
         createdBy: userId!, // Set the user ID
       ),

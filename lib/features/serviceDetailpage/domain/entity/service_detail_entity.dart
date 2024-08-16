@@ -7,8 +7,9 @@ class ServiceDetailEntity extends Equatable {
   final String serviceDescription;
   final String serviceCategory;
   final String serviceLocation;
+  final String contact;
   final String serviceImage;
-   final String createdAt;
+  final String createdAt;
 
   const ServiceDetailEntity({
     required this.serviceId,
@@ -17,6 +18,7 @@ class ServiceDetailEntity extends Equatable {
     required this.serviceDescription,
     required this.serviceCategory,
     required this.serviceLocation,
+    required this.contact,
     required this.serviceImage,
     required this.createdAt,
   });
@@ -28,6 +30,7 @@ class ServiceDetailEntity extends Equatable {
         serviceDescription,
         serviceCategory,
         serviceLocation,
+        contact,
         serviceImage,
         createdAt,
       ];

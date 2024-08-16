@@ -37,7 +37,7 @@ import 'package:dio/dio.dart';
 // Define the service model based on your API response
 class ServiceModel {
   final String id;
-  final String serviceName;
+  final String serviceTitle;
   final double servicePrice;
   final String serviceDescription;
   final String serviceCategory;
@@ -46,7 +46,7 @@ class ServiceModel {
 
   ServiceModel({
     required this.id,
-    required this.serviceName,
+    required this.serviceTitle,
     required this.servicePrice,
     required this.serviceDescription,
     required this.serviceCategory,
@@ -57,7 +57,7 @@ class ServiceModel {
   factory ServiceModel.fromJson(Map<String, dynamic> json) {
     return ServiceModel(
       id: json['_id'],
-      serviceName: json['serviceName'],
+      serviceTitle: json['serviceTitle'],
       servicePrice: json['servicePrice'].toDouble(),
       serviceDescription: json['serviceDescription'],
       serviceCategory: json['serviceCategory'],
@@ -86,13 +86,13 @@ class SearchViewModel extends StateNotifier<SearchState> {
 
   final Dio _dio = Dio();
 
-  Future<void> searchServices(String serviceName) async {
+  Future<void> searchServices(String serviceTitle) async {
     state = SearchState(isLoading: true);
 
     try {
       final response = await _dio.post(
         'http://localhost:8000/api/service/search',
-        data: {'serviceName': serviceName},
+        data: {'serviceTitle': serviceTitle},
       );
 
       if (response.statusCode == 200) {

@@ -11,25 +11,24 @@ final serviceDetailViewModelProvider =
 
 class ServiceViewmodel extends StateNotifier<ServiceDetailState> {
   ServiceViewmodel(this.serviceUsecase) : super(ServiceDetailState.initial());
+
   final ServiceDetailUsecase serviceUsecase;
-  Future getPosts(String postId) async {
-    // String serviceId = '';// get the service Id
+
+  Future<void> getPosts(String postId) async {
     state = state.copyWith(isLoading: true);
 
-    // get data from data source
     final result = await serviceUsecase.getPosts(postId);
-    print('Result: ${result}');
-      result.fold(
-        (failure) {
-          state = state.copyWith(isLoading: false, error: failure.error);
-          print("Error: ${failure.error}");
-        },
-        (service) {
-          state =
-              state.copyWith(isLoading: false, service: service, error: null);
-          print("Service loaded: ${service.serviceTitle}");
-        },
-      );
-    
+    print('Result: $result');
+
+    result.fold(
+      (failure) {
+        state = state.copyWith(isLoading: false, error: failure.error);
+        print("Error: ${failure.error}");
+      },
+      (service) {
+        state = state.copyWith(isLoading: false, service: service, error: null);
+        print("Service loaded: ${service.serviceTitle}");
+      },
+    );
   }
 }

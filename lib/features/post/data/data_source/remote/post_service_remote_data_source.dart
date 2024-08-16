@@ -24,7 +24,8 @@ class PostServiceRemoteDataSource {
     required this.userSharedPrefs,
   });
 
-  Future<Either<Failure, bool>> createService(PostServiceDTO postDTO, File imageFile) async {
+  Future<Either<Failure, bool>> createService(
+      PostServiceDTO postDTO, File imageFile) async {
     try {
       String? token;
       var data = await userSharedPrefs.getUserToken();
@@ -43,6 +44,7 @@ class PostServiceRemoteDataSource {
         'serviceCategory': postDTO.service.serviceCategory,
         'servicePrice': postDTO.service.servicePrice.toString(),
         'serviceLocation': postDTO.service.serviceLocation,
+        'contact': postDTO.service.contact,
         'createdBy': postDTO.service.createdBy, // Include createdBy
         'serviceImage': await MultipartFile.fromFile(
           imageFile.path,

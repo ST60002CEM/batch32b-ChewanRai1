@@ -4,6 +4,7 @@ import 'package:all_sensors2/all_sensors2.dart';
 import 'package:finalproject/core/common/my_snackbar.dart';
 import 'package:finalproject/core/common/my_yes_no_dialog.dart';
 import 'package:finalproject/features/auth/presentation/viewmodel/auth_view_model.dart';
+import 'package:finalproject/features/forgotPassword/presentation/view/verification_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,8 +17,9 @@ class LoginView extends ConsumerStatefulWidget {
 
 class _LoginViewState extends ConsumerState<LoginView> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController(text: 'crai@gmail.com');
-  final _passwordController = TextEditingController(text: '1234qwer');
+  final _emailController =
+      TextEditingController(text: 'kulung.che14@gmail.com');
+  final _passwordController = TextEditingController(text: 'chewan1234');
 
   bool _isPasswordVisible = false;
   bool isObscure = true;
@@ -157,14 +159,13 @@ class _LoginViewState extends ConsumerState<LoginView> {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      // Handle forgot password action
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const VerificationView()),
+                      );
                     },
-                    child: const Text(
-                      'Forgot password?',
-                      style: TextStyle(
-                        color: Colors.green, // Changed text color
-                      ),
-                    ),
+                    child: const Text('Forgot Password?'),
                   ),
                 ),
                 const SizedBox(height: 50.0),

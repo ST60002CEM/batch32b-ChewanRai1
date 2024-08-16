@@ -1,7 +1,8 @@
 import 'package:finalproject/features/dashboard/presentation/view/home_view.dart';
-import 'package:finalproject/features/dashboard/presentation/view/inbox_view.dart';
 import 'package:finalproject/features/dashboard/presentation/view/plan_view.dart';
 import 'package:finalproject/features/dashboard/presentation/view/person_view.dart';
+import 'package:finalproject/features/plan/presentation/view/plan_view.dart';
+import 'package:finalproject/features/post/presentation/view/post_view.dart';
 import 'package:finalproject/features/search/presentation/view/search_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,8 +20,8 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
   final List<Widget> _screens = [
     const HomeView(),
     const SearchView(),
-    const PlanView(),
-    const InboxView(),
+    const FavoriteView(),
+    const PostServiceView(),
   ];
 
   @override
@@ -40,6 +41,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
             ),
           ],
         ),
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.green,
         elevation: 2,
         actions: [
@@ -53,7 +55,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
             },
           ),
           const SizedBox(width: 16),
-          const Icon(Icons.notifications_none),
+          // const Icon(Icons.notifications_none),
           const SizedBox(width: 16),
         ],
       ),
@@ -74,8 +76,8 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
             label: 'Plan',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.message_outlined),
-            label: 'Inbox',
+            icon: Icon(Icons.handyman),
+            label: 'Be Pro',
           ),
         ],
         backgroundColor: Colors.white,

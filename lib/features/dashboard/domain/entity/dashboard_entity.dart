@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class DashboardEntity extends Equatable {
   final String serviceId;
-  final String serviceName;
+  final String serviceTitle;
   final int servicePrice;
   final String serviceDescription;
   final String serviceCategory;
@@ -11,7 +11,7 @@ class DashboardEntity extends Equatable {
 
   const DashboardEntity({
     required this.serviceId,
-    required this.serviceName,
+    required this.serviceTitle,
     required this.servicePrice,
     required this.serviceDescription,
     required this.serviceCategory,
@@ -21,7 +21,7 @@ class DashboardEntity extends Equatable {
   @override
   List<Object?> get props => [
         serviceId,
-        serviceName,
+        serviceTitle,
         servicePrice,
         serviceDescription,
         serviceCategory,

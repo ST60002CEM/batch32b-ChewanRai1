@@ -1,5 +1,6 @@
 import 'package:finalproject/features/auth/presentation/viewmodel/auth_view_model.dart';
 import 'package:finalproject/features/dashboard/presentation/view/plan_view.dart';
+import 'package:finalproject/features/plan/presentation/view/plan_view.dart';
 import 'package:finalproject/features/profile/presentation/view/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -67,31 +68,31 @@ class PersonView extends ConsumerWidget {
             },
           ),
           MenuItem(
-            title: 'Monthly plans',
-            subtitle: 'Your planned projects',
+            title: 'Your plans',
+            subtitle: 'Your plans to get service',
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const PlanView()),
+                MaterialPageRoute(builder: (context) => const FavoriteView()),
               );
 
               // Navigate to monthly plans screen
             },
           ),
-          MenuItem(
-            title: 'To-do list',
-            subtitle: 'Your service list',
-            onTap: () {
-              // Navigate to to-do list screen
-            },
-          ),
-          MenuItem(
-            title: 'Rating and Reviews',
-            subtitle: 'Review the service or service providers',
-            onTap: () {
-              // Navigate to rating and reviews screen
-            },
-          ),
+          // MenuItem(
+          //   title: 'To-do list',
+          //   subtitle: 'Your service list',
+          //   onTap: () {
+          //     // Navigate to to-do list screen
+          //   },
+          // ),
+          // MenuItem(
+          //   title: 'Rating and Reviews',
+          //   subtitle: 'Review the service or service providers',
+          //   onTap: () {
+          //     // Navigate to rating and reviews screen
+          //   },
+          // ),
           MenuItem(
             title: 'Help and Terms of use',
             subtitle: 'Terms and condition regarding the app',

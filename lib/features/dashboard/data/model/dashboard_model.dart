@@ -10,7 +10,7 @@ final dashboardModelProvider = Provider((ref) {
 class DashboardModel {
   @JsonKey(name: '_id')
   final String serviceId;
-  final String serviceName;
+  final String serviceTitle;
   final int servicePrice;
   final String serviceDescription;
   final String serviceCategory;
@@ -19,7 +19,7 @@ class DashboardModel {
 
   const DashboardModel({
     required this.serviceId,
-    required this.serviceName,
+    required this.serviceTitle,
     required this.servicePrice,
     required this.serviceDescription,
     required this.serviceCategory,
@@ -29,19 +29,19 @@ class DashboardModel {
 
   factory DashboardModel.fromJson(Map<String, dynamic> json) {
     return DashboardModel(
-      serviceId: json['_id'],
-      serviceName: json['serviceName'],
-      serviceDescription: json['serviceDescription'],
-      serviceCategory: json['serviceCategory'],
-      servicePrice: json['servicePrice'],
-      serviceLocation: json['serviceLocation'],
-      serviceImage: json['serviceImage'],
+      serviceId: json['_id'] ?? '',
+      serviceTitle: json['serviceTitle'] ?? '',
+      serviceDescription: json['serviceDescription'] ?? '',
+      serviceCategory: json['serviceCategory'] ?? '',
+      servicePrice: json['servicePrice'] ?? 0,
+      serviceLocation: json['serviceLocation'] ?? '',
+      serviceImage: json['serviceImage'] ?? '',
     );
   }
 
   DashboardEntity toEntity() => DashboardEntity(
       serviceId: serviceId,
-      serviceName: serviceName,
+      serviceTitle: serviceTitle,
       serviceDescription: serviceDescription,
       serviceCategory: serviceCategory,
       servicePrice: servicePrice,
@@ -50,7 +50,7 @@ class DashboardModel {
 
   DashboardModel.empty()
       : serviceId = '',
-        serviceName = '',
+        serviceTitle = '',
         serviceDescription = '',
         serviceCategory = '',
         servicePrice = 0,

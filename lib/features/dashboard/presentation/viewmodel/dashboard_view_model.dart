@@ -53,9 +53,9 @@ class DashboardViewModel extends StateNotifier<DashboardState> {
     }
   }
 
-  void openPostPage() {
-    // code here
-  }
-
   getAllPosts() {}
+
+  void openPostPage(String postId) {
+    navigator.openServiceDetailsView(postId);
+  }
 }

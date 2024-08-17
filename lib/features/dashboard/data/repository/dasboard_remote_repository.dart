@@ -20,4 +20,10 @@ class DashboardRemoteRepository implements IDashboardRepository {
   Future<Either<PostFailure, List<DashboardEntity>>> getAllPosts(int page) {
     return dashboardRemoteDataSource.getAllPosts(page);
   }
+
+    @override
+  Future<Either<PostFailure, List<DashboardEntity>>> getServicesByCategory(
+      String category, int page) {
+    return dashboardRemoteDataSource.getServicesByCategory(category, page);
+  }
 }

@@ -17,9 +17,8 @@ class LoginView extends ConsumerStatefulWidget {
 
 class _LoginViewState extends ConsumerState<LoginView> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController =
-      TextEditingController(text: 'kulung.che14@gmail.com');
-  final _passwordController = TextEditingController(text: 'chewan1234');
+  final _emailController = TextEditingController(text: '');
+  final _passwordController = TextEditingController(text: '');
 
   bool _isPasswordVisible = false;
   bool isObscure = true;
@@ -51,6 +50,8 @@ class _LoginViewState extends ConsumerState<LoginView> {
   }
 
   void _checkGyroscopeValues(List<double> values) async {
+    print('Gyroscope Values: X=${values[0]}, Y=${values[1]}, Z=${values[2]}');
+    print('Gyroscope Values: $values');
     const double threshold = 5; // Example threshold value, adjust as needed
     if (values.any((value) => value.abs() > threshold)) {
       if (showYesNoDialog && !isDialogShowing) {
@@ -201,12 +202,20 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       child: ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            await ref
+                            final result = await ref
                                 .read(authViewModelProvider.notifier)
                                 .loginUser(
                                   _emailController.text,
                                   _passwordController.text,
                                 );
+
+                            if (result == 'error') {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Invalid credentials'),
+                                ),
+                              );
+                            }
                           }
                         },
                         style: ElevatedButton.styleFrom(
@@ -215,9 +224,9 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         child: const Text(
                           'Login',
                           style: TextStyle(
-                            fontSize: 18, // Adjusted font size
-                            fontFamily: 'Roboto', // Applied font family
-                            fontWeight: FontWeight.bold, // Applied font weight
+                            fontSize: 18,
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),

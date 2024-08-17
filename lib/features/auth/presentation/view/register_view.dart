@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:finalproject/features/auth/domain/entity/auth_entity.dart';
+import 'package:finalproject/features/auth/presentation/view/login_view.dart';
 import 'package:finalproject/features/auth/presentation/viewmodel/auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -64,55 +65,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
               key: _key,
               child: Column(
                 children: [
-                  // InkWell(
-                  //   onTap: () {
-                  //     showModalBottomSheet(
-                  //       backgroundColor: Colors.grey[300],
-                  //       context: context,
-                  //       isScrollControlled: true,
-                  //       shape: const RoundedRectangleBorder(
-                  //         borderRadius: BorderRadius.vertical(
-                  //           top: Radius.circular(20),
-                  //         ),
-                  //       ),
-                  //       builder: (context) => Padding(
-                  //         padding: const EdgeInsets.all(20),
-                  //         child: Row(
-                  //           mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  //           children: [
-                  //             ElevatedButton.icon(
-                  //               onPressed: () {
-                  //                 checkCameraPermission();
-                  //                 _browseImage(ref, ImageSource.camera);
-                  //                 Navigator.pop(context);
-                  //               },
-                  //               icon: const Icon(Icons.camera),
-                  //               label: const Text('Camera'),
-                  //             ),
-                  //             ElevatedButton.icon(
-                  //               onPressed: () {
-                  //                 _browseImage(ref, ImageSource.gallery);
-                  //                 Navigator.pop(context);
-                  //               },
-                  //               icon: const Icon(Icons.image),
-                  //               label: const Text('Gallery'),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //     );
-                  //   },
-                  //   child: SizedBox(
-                  //     height: 200,
-                  //     width: 200,
-                  //     child: CircleAvatar(
-                  //       radius: 50,
-                  //       backgroundImage: _img != null
-                  //           ? FileImage(_img!)
-                  //           : const AssetImage('') as ImageProvider,
-                  //     ),
-                  //   ),
-                  // ),
+                  // Commented-out code for image selection
                   const SizedBox(height: 25),
                   TextFormField(
                     controller: _fnameController,
@@ -209,7 +162,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_key.currentState!.validate()) {
                           var user = AuthEntity(
                             fname: _fnameController.text,
@@ -222,9 +175,31 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                             password: _passwordController.text,
                           );
 
-                          ref
+                          // Call registerUser and handle the result
+                          final result = await ref
                               .read(authViewModelProvider.notifier)
                               .registerUser(user);
+
+                          if (result == 'success') {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Registered successfully!'),
+                              ),
+                            );
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LoginView(),
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                    'Registration failed. Please try again.'),
+                              ),
+                            );
+                          }
                         }
                       },
                       child: const Text('Register'),

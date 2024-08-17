@@ -39,39 +39,54 @@ class AuthViewModel extends StateNotifier<AuthState> {
     );
   }
 
-  Future<void> registerUser(AuthEntity user) async {
-    state = state.copyWith(isLoading: true);
-    var data = await authUseCase.registerUser(user);
-    data.fold(
-      (failure) {
-        state = state.copyWith(
-          isLoading: false,
-          error: failure.error,
-          // error: failure.error,
-        );
-        // showMySnackBar(message: failure.error, color: Colors.red);
-      },
-      (success) {
-        state = state.copyWith(isLoading: false, error: null);
-        // showMySnackBar(message: "Successfully registered");
-      },
-    );
-  }
+  // Future<void> registerUser(AuthEntity user) async {
+  //   state = state.copyWith(isLoading: true);
+  //   var data = await authUseCase.registerUser(user);
+  //   data.fold(
+  //     (failure) {
+  //       state = state.copyWith(
+  //         isLoading: false,
+  //         error: failure.error,
+  //         // error: failure.error,
+  //       );
+  //       // showMySnackBar(message: failure.error, color: Colors.red);
+  //     },
+  //     (success) {
+  //       state = state.copyWith(isLoading: false, error: null);
+  //       // showMySnackBar(message: "Successfully registered");
+  //     },
+  //   );
+  // }
+  Future<String> registerUser(AuthEntity user) async {
+  state = state.copyWith(isLoading: true);
+  var data = await authUseCase.registerUser(user);
+  return data.fold(
+    (failure) {
+      state = state.copyWith(
+        isLoading: false,
+        error: failure.error,
+      );
+      return 'error';
+    },
+    (success) {
+      state = state.copyWith(isLoading: false, error: null);
+      return 'success';
+    },
+  );
+}
 
-  Future<void> loginUser(
-    String email,
-    String password,
-  ) async {
+  Future<String> loginUser(String email, String password) async {
     state = state.copyWith(isLoading: true);
     var data = await authUseCase.loginUser(email, password);
-    data.fold(
+    return data.fold(
       (failure) {
         state = state.copyWith(isLoading: false, error: failure.error);
-        showMySnackBar(message: failure.error, color: Colors.red);
+        return 'error';
       },
       (success) {
         state = state.copyWith(isLoading: false, error: null);
         openHomeView();
+        return 'success';
       },
     );
   }

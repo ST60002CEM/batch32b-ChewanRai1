@@ -6,7 +6,7 @@ class ProfileEntity {
   final String username;
   final String userId;
 
-  ProfileEntity({
+  const ProfileEntity({
     required this.fname,
     required this.lname,
     required this.phone,

@@ -14,7 +14,7 @@ class SearchRemoteDataSource {
     try {
       // Call the server's search endpoint
       final response = await _dio.post(
-        'http://localhost:8000/api/service/search', // Replace with your actual server URL
+        'http://192.168.1.65:8000/api/service/search', // Replace with your actual server URL
         data: {'serviceTitle': query.keyword},
       );
 
@@ -26,7 +26,7 @@ class SearchRemoteDataSource {
                       '', // Assuming provider info is included
                   price: json['servicePrice'],
                   imageUrl:
-                      'http://localhost:8000/public/services/${json['serviceImage']}', // Construct image URL
+                      'http://192.168.1.65:8000/public/services/${json['serviceImage']}', // Construct image URL
                 ))
             .toList();
 

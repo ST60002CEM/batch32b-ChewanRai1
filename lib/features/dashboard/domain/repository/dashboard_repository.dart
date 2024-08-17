@@ -10,4 +10,5 @@ final dashboardRepositoryProvider = Provider<IDashboardRepository>(
 
 abstract class IDashboardRepository {
   Future<Either<PostFailure, List<DashboardEntity>>> getAllPosts(int page);
+  Future<Either<PostFailure, List<DashboardEntity>>> getServicesByCategory(String category, int page);
 }

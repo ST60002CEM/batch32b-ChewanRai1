@@ -14,6 +14,20 @@ import 'package:finalproject/features/auth/domain/usecases/auth_usecase.dart'
     as _i3;
 import 'package:finalproject/features/auth/presentation/navigator/login_navigator.dart'
     as _i8;
+import 'package:finalproject/features/auth/presentation/navigator/register_navigator.dart'
+    as _i9;
+import 'package:finalproject/features/profile/domain/entity/profile_entity.dart'
+    as _i15;
+import 'package:finalproject/features/profile/domain/repository/profile_repository.dart'
+    as _i14;
+import 'package:finalproject/features/rateAndReview/domain/entity/review_entity.dart'
+    as _i13;
+import 'package:finalproject/features/rateAndReview/domain/repository/review_repository.dart'
+    as _i12;
+import 'package:finalproject/features/serviceDetailpage/domain/entity/service_detail_entity.dart'
+    as _i11;
+import 'package:finalproject/features/serviceDetailpage/domain/repository/service_detail_repository.dart'
+    as _i10;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -183,4 +197,180 @@ class MockLoginViewNavigator extends _i1.Mock
         ),
         returnValueForMissingStub: null,
       );
+}
+
+/// A class which mocks [RegisterViewNavigator].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockRegisterViewNavigator extends _i1.Mock
+    implements _i9.RegisterViewNavigator {}
+
+/// A class which mocks [IServiceDetailRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockIServiceDetailRepository extends _i1.Mock
+    implements _i10.IServiceDetailRepository {
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, _i11.ServiceDetailEntity>> getPosts(
+          String? serviceId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getPosts,
+          [serviceId],
+        ),
+        returnValue:
+            _i4.Future<_i2.Either<_i5.Failure, _i11.ServiceDetailEntity>>.value(
+                _FakeEither_0<_i5.Failure, _i11.ServiceDetailEntity>(
+          this,
+          Invocation.method(
+            #getPosts,
+            [serviceId],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i5.Failure, _i11.ServiceDetailEntity>>.value(
+                _FakeEither_0<_i5.Failure, _i11.ServiceDetailEntity>(
+          this,
+          Invocation.method(
+            #getPosts,
+            [serviceId],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i11.ServiceDetailEntity>>);
+}
+
+/// A class which mocks [ReviewRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockReviewRepository extends _i1.Mock implements _i12.ReviewRepository {
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, bool>> createReview(
+    String? serviceId,
+    double? rating,
+    String? comment,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createReview,
+          [
+            serviceId,
+            rating,
+            comment,
+          ],
+        ),
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, bool>>.value(
+            _FakeEither_0<_i5.Failure, bool>(
+          this,
+          Invocation.method(
+            #createReview,
+            [
+              serviceId,
+              rating,
+              comment,
+            ],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i5.Failure, bool>>.value(
+                _FakeEither_0<_i5.Failure, bool>(
+          this,
+          Invocation.method(
+            #createReview,
+            [
+              serviceId,
+              rating,
+              comment,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, bool>>);
+
+  @override
+  _i4.Future<
+      _i2.Either<_i5.Failure, List<_i13.ReviewEntity>>> getServiceReviews(
+          String? serviceId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getServiceReviews,
+          [serviceId],
+        ),
+        returnValue:
+            _i4.Future<_i2.Either<_i5.Failure, List<_i13.ReviewEntity>>>.value(
+                _FakeEither_0<_i5.Failure, List<_i13.ReviewEntity>>(
+          this,
+          Invocation.method(
+            #getServiceReviews,
+            [serviceId],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i5.Failure, List<_i13.ReviewEntity>>>.value(
+                _FakeEither_0<_i5.Failure, List<_i13.ReviewEntity>>(
+          this,
+          Invocation.method(
+            #getServiceReviews,
+            [serviceId],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, List<_i13.ReviewEntity>>>);
+}
+
+/// A class which mocks [IProfileRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockIProfileRepository extends _i1.Mock
+    implements _i14.IProfileRepository {
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, _i15.ProfileEntity>> getUser() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getUser,
+          [],
+        ),
+        returnValue:
+            _i4.Future<_i2.Either<_i5.Failure, _i15.ProfileEntity>>.value(
+                _FakeEither_0<_i5.Failure, _i15.ProfileEntity>(
+          this,
+          Invocation.method(
+            #getUser,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i5.Failure, _i15.ProfileEntity>>.value(
+                _FakeEither_0<_i5.Failure, _i15.ProfileEntity>(
+          this,
+          Invocation.method(
+            #getUser,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i15.ProfileEntity>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, bool>> editProfile(
+          _i15.ProfileEntity? profile) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #editProfile,
+          [profile],
+        ),
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, bool>>.value(
+            _FakeEither_0<_i5.Failure, bool>(
+          this,
+          Invocation.method(
+            #editProfile,
+            [profile],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i5.Failure, bool>>.value(
+                _FakeEither_0<_i5.Failure, bool>(
+          this,
+          Invocation.method(
+            #editProfile,
+            [profile],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, bool>>);
 }

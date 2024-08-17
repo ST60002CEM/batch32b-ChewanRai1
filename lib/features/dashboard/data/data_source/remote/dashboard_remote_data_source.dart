@@ -40,4 +40,30 @@ class DashboardRemoteDataSource {
       return Left(PostFailure(message: e.message.toString()));
     }
   }
+  Future<Either<PostFailure, List<DashboardEntity>>> getServicesByCategory(
+      String category, int page) async {
+    try {
+      final response = await _dio.get(
+        ApiEndpoints.pagination,
+        queryParameters: {
+          'category': category,
+          '_page': page,
+          '_limit': ApiEndpoints.limitPage,
+        },
+      );
+      if (response.statusCode == 200) {
+        final getAllPostDto = DashboardDto.fromJson(response.data);
+        final posts = getAllPostDto.data.map((e) => e.toEntity()).toList();
+        return Right(posts);
+      } else {
+        return const Left(
+          PostFailure(
+            message: 'Post Failed to achieve',
+          ),
+        );
+      }
+    } on DioException catch (e) {
+      return Left(PostFailure(message: e.message.toString()));
+    }
+  }
 }

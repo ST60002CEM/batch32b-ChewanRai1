@@ -164,7 +164,7 @@ class _ServiceDetailViewState extends ConsumerState<ServiceDetailView> {
                             ),
                           ),
                           Text(
-                            'NPR ${post.servicePrice}',
+                            '~NPR ${post.servicePrice}',
                             style: const TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,

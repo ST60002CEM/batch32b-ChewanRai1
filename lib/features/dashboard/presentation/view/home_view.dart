@@ -97,7 +97,7 @@ class _HomeScreenState extends ConsumerState<HomeView> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  // const SizedBox(height: 10),
                   _recentPostsSection(mediaSize, state),
                 ],
               ),
@@ -110,7 +110,7 @@ class _HomeScreenState extends ConsumerState<HomeView> {
 
   Widget _searchBar() {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
       height: 52,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -221,7 +221,7 @@ class _HomeScreenState extends ConsumerState<HomeView> {
 
   Widget _categorySection() {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 1.0),
+      padding: const EdgeInsets.symmetric(vertical: 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -251,7 +251,7 @@ class _HomeScreenState extends ConsumerState<HomeView> {
         return true;
       },
       child: SizedBox(
-        height: mediaSize.height * 0.35, // Reduced the height slightly
+        height: mediaSize.height * 0.60, // Reduced the height slightly
         child: ListView.builder(
           physics: const AlwaysScrollableScrollPhysics(),
           controller: _scrollController,

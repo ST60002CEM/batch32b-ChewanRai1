@@ -6,7 +6,8 @@ import 'package:finalproject/core/networking/remote/http_service.dart';
 import 'package:finalproject/core/shared_prefs/user_shared_prefs.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final forgotPasswordRemoteDataSourceProvider = Provider<ForgotPasswordRemoteDataSource>((ref) {
+final forgotPasswordRemoteDataSourceProvider =
+    Provider<ForgotPasswordRemoteDataSource>((ref) {
   final dio = ref.read(httpServiceProvider);
   final userSharedPrefs = ref.read(userSharedPrefsProvider);
   return ForgotPasswordRemoteDataSource(dio, userSharedPrefs);
@@ -18,7 +19,8 @@ class ForgotPasswordRemoteDataSource {
 
   ForgotPasswordRemoteDataSource(this._dio, this._userSharedPrefs);
 
-  Future<Either<ForgotPasswordFailure, bool>> sendForgotPasswordEmail(String email) async {
+  Future<Either<ForgotPasswordFailure, bool>> sendForgotPasswordEmail(
+      String email) async {
     try {
       final response = await _dio.post(
         ApiEndpoints.forgotPassword,
@@ -41,7 +43,8 @@ class ForgotPasswordRemoteDataSource {
     }
   }
 
-  Future<Either<ForgotPasswordFailure, bool>> verifyOtpAndResetPassword(String email, String otp, String password) async {
+  Future<Either<ForgotPasswordFailure, bool>> verifyOtpAndResetPassword(
+      String email, String otp, String password) async {
     try {
       final response = await _dio.post(
         ApiEndpoints.verifyOtp,

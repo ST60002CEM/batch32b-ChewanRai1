@@ -14,7 +14,7 @@ class HomeView extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeView> {
   final ScrollController _scrollController = ScrollController();
   bool isLoading = false;
-  int currentPage = 1;
+  int currentPage = 0;
 
   @override
   void initState() {
@@ -58,6 +58,16 @@ class _HomeScreenState extends ConsumerState<HomeView> {
     await _loadMorePosts();
   }
 
+  final List<String> images = [
+    'assets/images/s1.jpg',
+    'assets/images/s2.jpg',
+    'assets/images/s3.jpg',
+    'assets/images/s4.jpg',
+    'assets/images/s5.jpeg',
+    'assets/images/s6.jpeg',
+  ];
+  int currentSlide = 0;
+
   @override
   Widget build(BuildContext context) {
     Size mediaSize = MediaQuery.of(context).size;
@@ -75,10 +85,18 @@ class _HomeScreenState extends ConsumerState<HomeView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _searchBar(),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  const SizedBox(height: 10),
+                  _homeSlider(mediaSize), // Add the slider here
+                  const SizedBox(height: 20),
                   _categorySection(),
+                  const SizedBox(height: 10),
+                  const Text(
+                    "All Services",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   const SizedBox(height: 10),
                   _recentPostsSection(mediaSize, state),
                 ],
@@ -120,6 +138,78 @@ class _HomeScreenState extends ConsumerState<HomeView> {
     );
   }
 
+  Widget _homeSlider(Size mediaSize) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double sliderHeight = constraints.maxHeight * 0.2;
+        if (sliderHeight > 250) sliderHeight = 250;
+        return Stack(
+          children: [
+            SizedBox(
+              height: sliderHeight,
+              width: constraints.maxWidth,
+              child: PageView.builder(
+                onPageChanged: (value) {
+                  setState(() {
+                    currentSlide = value;
+                  });
+                },
+                itemCount: images.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      image: DecorationImage(
+                        image: AssetImage(images[index]),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(0),
+                        gradient: LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          colors: [
+                            Colors.black.withOpacity(0.6),
+                            Colors.transparent,
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            Positioned.fill(
+              bottom: 10,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    images.length,
+                    (index) => AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      width: currentSlide == index ? 15 : 8,
+                      height: 8,
+                      margin: const EdgeInsets.only(right: 4),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color:
+                            currentSlide == index ? Colors.black : Colors.grey,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Widget _categoryItem({required IconData icon, required String label}) {
     return Column(
       children: [
@@ -131,15 +221,16 @@ class _HomeScreenState extends ConsumerState<HomeView> {
 
   Widget _categorySection() {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 1.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _categoryItem(icon: Icons.cleaning_services, label: 'Cleaner'),
-          _categoryItem(icon: Icons.electrical_services, label: 'Electrician'),
-          _categoryItem(icon: Icons.plumbing, label: 'Plumber'),
-          _categoryItem(icon: Icons.format_paint, label: 'Painter'),
-          _categoryItem(icon: Icons.more_horiz, label: 'More..'),
+          _categoryItem(icon: Icons.construction, label: 'Maintenance'),
+          _categoryItem(icon: Icons.event, label: 'Events'),
+          _categoryItem(icon: Icons.architecture, label: 'Modeling'),
+          _categoryItem(icon: Icons.celebration, label: 'Weddings'),
+
+          // _categoryItem(icon: Icons.more_horiz, label: 'More..'),
         ],
       ),
     );
@@ -160,7 +251,7 @@ class _HomeScreenState extends ConsumerState<HomeView> {
         return true;
       },
       child: SizedBox(
-        height: mediaSize.height * 0.6,
+        height: mediaSize.height * 0.35, // Reduced the height slightly
         child: ListView.builder(
           physics: const AlwaysScrollableScrollPhysics(),
           controller: _scrollController,
@@ -197,7 +288,8 @@ class _HomeScreenState extends ConsumerState<HomeView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      height: mediaSize.height * 0.25,
+                      height:
+                          mediaSize.height * 0.2, // Reduced the height slightly
                       decoration: BoxDecoration(
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(20),

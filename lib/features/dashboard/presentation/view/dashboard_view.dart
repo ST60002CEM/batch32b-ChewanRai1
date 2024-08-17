@@ -1,5 +1,4 @@
 import 'package:finalproject/features/dashboard/presentation/view/home_view.dart';
-import 'package:finalproject/features/dashboard/presentation/view/plan_view.dart';
 import 'package:finalproject/features/dashboard/presentation/view/setting_view.dart';
 import 'package:finalproject/features/plan/presentation/view/plan_view.dart';
 import 'package:finalproject/features/post/presentation/view/post_view.dart';
@@ -54,9 +53,9 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
               );
             },
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 12),
           // const Icon(Icons.notifications_none),
-          const SizedBox(width: 16),
+          // const SizedBox(width: 16),
         ],
       ),
       body: _screens[_selectedIndex],

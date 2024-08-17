@@ -1,5 +1,4 @@
 import 'package:finalproject/features/auth/presentation/viewmodel/auth_view_model.dart';
-import 'package:finalproject/features/dashboard/presentation/view/plan_view.dart';
 import 'package:finalproject/features/plan/presentation/view/plan_view.dart';
 import 'package:finalproject/features/profile/presentation/view/profile_view.dart';
 import 'package:finalproject/features/terms/terms_view.dart';

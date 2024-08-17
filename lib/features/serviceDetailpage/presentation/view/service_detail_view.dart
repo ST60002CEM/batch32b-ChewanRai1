@@ -5,6 +5,7 @@ import 'package:finalproject/features/serviceDetailpage/presentation/viewmodel/s
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ServiceDetailView extends ConsumerStatefulWidget {
   final String serviceId;
@@ -172,6 +173,25 @@ class _ServiceDetailViewState extends ConsumerState<ServiceDetailView> {
                           ),
                         ],
                       ),
+
+                      const SizedBox(height: 16),
+                      // const Text(
+                      //   'Description',
+                      //   style: TextStyle(
+                      //     fontSize: 20,
+                      //     fontWeight: FontWeight.bold,
+                      //   ),
+                      // ),
+                      // const SizedBox(height: 8),
+                      Text(
+                        post.serviceDescription,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontStyle: FontStyle.italic,
+                          fontWeight:
+                              FontWeight.w500, // This makes it a little bold
+                        ),
+                      ),
                       const SizedBox(height: 16),
                       Row(
                         children: [
@@ -183,46 +203,149 @@ class _ServiceDetailViewState extends ConsumerState<ServiceDetailView> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                post.serviceLocation,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                              // Text(
+                              //   post.serviceLocation,
+                              //   style: const TextStyle(
+                              //     fontSize: 16,
+                              //     fontWeight: FontWeight.bold,
+                              //   ),
+                              // ),
                               Text(
                                 post.contact, // Use the actual contact value here
-                                style: const TextStyle(fontSize: 16),
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ],
                           ),
                         ],
                       ),
-                      const SizedBox(height: 16),
-                      const Text(
-                        'Description',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      // const SizedBox(height: 16),
+                      // const Text(
+                      //   'Description',
+                      //   style: TextStyle(
+                      //     fontSize: 20,
+                      //     fontWeight: FontWeight.bold,
+                      //   ),
+                      // ),
+                      // const SizedBox(height: 8),
+                      // Text(
+                      //   post.serviceDescription,
+                      //   style: const TextStyle(fontSize: 16),
+                      // ),
+                      // const SizedBox(height: 16),
+                      // const Text(
+                      //   'Category',
+                      //   style: TextStyle(
+                      //     fontSize: 20,
+                      //     fontWeight: FontWeight.bold,
+                      //   ),
+                      // ),
+                      // Text(
+                      //   post.serviceCategory,
+                      //   style: const TextStyle(fontSize: 16),
+                      // ),
+                      const SizedBox(
+                          height: 16), // Add some spacing before the button
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: ElevatedButton.icon(
+                              onPressed: () async {
+                                final phoneNumber = post.contact;
+                                final Uri url =
+                                    Uri(scheme: 'tel', path: phoneNumber);
+
+                                if (await canLaunchUrl(url)) {
+                                  await launchUrl(url);
+                                } else {
+                                  // Handle the error gracefully
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            'Could not launch phone dialer')),
+                                  );
+                                }
+                              },
+                              icon:
+                                  const Icon(Icons.phone, color: Colors.white),
+                              label: const Text(
+                                'Call Now',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors
+                                    .green, // Set the button color to green
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 12),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                              width: 16), // Spacing between the buttons
+                          Expanded(
+                            child: ElevatedButton.icon(
+                              onPressed: () async {
+                                if (_isFavorite) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            'Service is already in your plan')),
+                                  );
+                                } else {
+                                  final result = await ref
+                                      .read(favoriteViewModelProvider.notifier)
+                                      .addFavorite(widget.serviceId);
+                                  result.fold(
+                                    (failure) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                            content: Text(
+                                                'Service is already in in your plan')),
+                                      );
+                                    },
+                                    (success) {
+                                      setState(() {
+                                        _isFavorite = true;
+                                      });
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                            content: Text(
+                                                'Service added to your plan')),
+                                      );
+                                    },
+                                  );
+                                }
+                              },
+                              icon: const Icon(Icons.schedule,
+                                  color: Colors.black), // Change color to black
+                              label: const Text(
+                                'Plan for Later',
+                                style: TextStyle(
+                                    color:
+                                        Colors.black), // Change color to black
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    Colors.blue, // Set the button color to blue
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 12),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 8),
-                      Text(
-                        post.serviceDescription,
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                      const SizedBox(height: 16),
-                      const Text(
-                        'Category',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        post.serviceCategory,
-                        style: const TextStyle(fontSize: 16),
-                      ),
+                      // const SizedBox(height: 16),
                       const SizedBox(height: 16),
                       const Text(
                         'Post Details',
@@ -235,40 +358,40 @@ class _ServiceDetailViewState extends ConsumerState<ServiceDetailView> {
                       InfoRow(label: 'Post Date', value: post.createdAt),
                       InfoRow(label: 'Location', value: post.serviceLocation),
                       const SizedBox(height: 16),
-                      const Text(
-                        'Quantity',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Row(
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.remove),
-                            onPressed: () {
-                              if (_quantity > 1) {
-                                setState(() {
-                                  _quantity--;
-                                });
-                              }
-                            },
-                          ),
-                          Text(
-                            '$_quantity',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.add),
-                            onPressed: () {
-                              setState(() {
-                                _quantity++;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
+                      // const Text(
+                      //   'Quantity',
+                      //   style: TextStyle(
+                      //     fontSize: 20,
+                      //     fontWeight: FontWeight.bold,
+                      //   ),
+                      // ),
+                      // const SizedBox(height: 8),
+                      // Row(
+                      //   children: [
+                      //     IconButton(
+                      //       icon: const Icon(Icons.remove),
+                      //       onPressed: () {
+                      //         if (_quantity > 1) {
+                      //           setState(() {
+                      //             _quantity--;
+                      //           });
+                      //         }
+                      //       },
+                      //     ),
+                      //     Text(
+                      //       '$_quantity',
+                      //       style: TextStyle(fontSize: 16),
+                      //     ),
+                      //     IconButton(
+                      //       icon: const Icon(Icons.add),
+                      //       onPressed: () {
+                      //         setState(() {
+                      //           _quantity++;
+                      //         });
+                      //       },
+                      //     ),
+                      //   ],
+                      // ),
                       const SizedBox(height: 16),
                       // Row(
                       //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -333,7 +456,7 @@ class _ServiceDetailViewState extends ConsumerState<ServiceDetailView> {
                         }).toList(),
                       const SizedBox(height: 16),
                       const Text(
-                        'Add a Review',
+                        'Share your experience',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -371,7 +494,8 @@ class _ServiceDetailViewState extends ConsumerState<ServiceDetailView> {
                                 _commentController.text,
                               );
                         },
-                        child: const Text('Submit Review'),
+                        child: const Text('Submit Review',
+                            selectionColor: Colors.black),
                       ),
                     ],
                   ),
